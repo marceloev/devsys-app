@@ -2,7 +2,7 @@
   <div class="d-flex" id="wrapper">
     <div class="border-right" id="sidebar-wrapper">
       <div class="sidebar-heading">
-          sdasd
+          <h3><u>TecLibrary</u></h3>
       </div>
       <div id="menu-item" class="list-group list-group-flush">
         <slot name="menu-itens"/>
@@ -82,6 +82,11 @@ body {
 #sidebar-wrapper .sidebar-heading {
   padding: 0.875rem 1.25rem;
   font-size: 1.2rem;
+}
+
+.sidebar-heading {
+  color: white;
+  margin-bottom: 40px;
 }
 
 #sidebar-wrapper .list-group {
