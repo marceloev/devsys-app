@@ -20,7 +20,6 @@ export default {
     if (this.icon === undefined) {
       $("#link-menu-item-icon").remove();
     } else {
-      console.log(this.icon);
       $("#link-menu-item-icon").addClass(this.icon);
     }
   }

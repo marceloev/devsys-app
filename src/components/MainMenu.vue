@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex" id="wrapper">
+  <div class="d-flex" id="wrapper" v-loading.body="loading">
     <div class="border-right" id="sidebar-wrapper">
       <div class="sidebar-heading">
           <h3><u>TecLibrary</u></h3>
@@ -43,7 +43,6 @@
           </ul>
         </div>
       </nav>
-
       <div class="container-fluid">
         <slot name="view"></slot>
       </div>
@@ -52,14 +51,21 @@
 </template>
 
 <script>
+import { Loading } from 'element-ui';
 export default {
   data: function() {
-    return {};
+    return {
+      loading
+    };
   },
   methods: {
     abreFechaMenuPanel() {
       $("#wrapper").toggleClass("toggled");
     }
+  }, beforeCreate: function() {
+    Loading.service({ text: "Carregando o menu principal..." });
+  },created: function () {
+    Loading.service({ text: "Carregando o menu principal..." }).close();
   }
 };
 </script>
