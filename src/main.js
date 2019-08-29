@@ -13,6 +13,8 @@ const router = new VueRouter({
   mode: 'history'
 })
 
+Vue.http.options.root = 'http://localhost:8180';
+
 new Vue({
   el: '#app',
   router,
