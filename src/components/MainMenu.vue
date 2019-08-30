@@ -1,20 +1,30 @@
 <template>
-  <div class="d-flex" id="wrapper" v-loading.body="loading">
+  <div class="d-flex" id="wrapper">
     <div class="border-right" id="sidebar-wrapper">
       <div class="sidebar-heading">
-          <h3><u>TecLibrary</u></h3>
+        <h3>
+          <u>TecLibrary</u>
+        </h3>
       </div>
       <div id="menu-item" class="list-group list-group-flush">
-        <slot name="menu-itens"/>
+        <slot name="menu-itens" />
       </div>
     </div>
-    
+
     <div id="page-content-wrapper">
-      <nav class="navbar navbar-light bg-light border-bottom justify-content-between navbar-expand" style="max-height: 45px;">
+      <nav
+        class="navbar navbar-light bg-light border-bottom justify-content-between navbar-expand"
+        style="max-height: 45px;"
+      >
         <i class="fas fa-bars btn btn-dark" @click="abreFechaMenuPanel()"></i>
 
         <form class="form-inline col-md-8">
-          <input class="form-control col-10" type="search" placeholder="Pesquise aqui algum livro" aria-label="Search">
+          <input
+            class="form-control col-10"
+            type="search"
+            placeholder="Pesquise aqui algum livro"
+            aria-label="Search"
+          />
           <button class="btn btn-outline-success col-of-1 col-2" type="submit">Search</button>
         </form>
 
@@ -26,7 +36,8 @@
                 id="navbarDropdown"
                 data-toggle="dropdown"
                 aria-haspopup="true"
-                aria-expanded="false">
+                aria-expanded="false"
+              >
                 <i class="fas fa-ellipsis-v"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -51,22 +62,27 @@
 </template>
 
 <script>
-import { Loading } from 'element-ui';
+import { Loading } from "element-ui";
 export default {
-  data: function() {
-    return {
-      loading
-    };
+  data() {
+    return {};
   },
   methods: {
     abreFechaMenuPanel() {
       $("#wrapper").toggleClass("toggled");
     }
-  }, beforeCreate: function() {
-    Loading.service({ text: "Carregando o menu principal..." });
-  },created: function () {
-    Loading.service({ text: "Carregando o menu principal..." }).close();
+  },
+  beforeCreate: function() {
+    Loading.service(loadingProps);
+  },
+  created: function() {
+    Loading.service(loadingProps).close();
+    this.abreFechaMenuPanel();
   }
+};
+
+var loadingProps = {
+  text: "Carregando o menu principal..."
 };
 </script>
 
@@ -76,7 +92,7 @@ body {
 }
 
 #sidebar-wrapper {
-  background-color: #7386D5;
+  background-color: #7386d5;
   min-height: 100vh;
   margin-left: -15rem;
   -webkit-transition: margin 0.25s ease-out;

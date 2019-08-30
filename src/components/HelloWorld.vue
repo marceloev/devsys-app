@@ -1,99 +1,46 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+  <div id="app">
+    <div id="title" class="row">
+      <hr class="col">
+      <h2 class="title-label col-auto">Empresas</h2>
+      <hr class="col">
+    </div>
   </div>
 </template>
 
 <script>
+import { Loading } from "element-ui";
 export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+  data() {
+    return {};
+  },
+  methods: {},
+  beforeCreate: function() {
+    Loading.service(loadingProps);
+  },
+  created: function() {
+    Loading.service(loadingProps).close();
   }
-}
+};
+
+var loadingProps = {
+  text: 'Carregando "Empresas"...'
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#title {
+  margin: 0px;
+  padding: 0px 0px 0px 10px;
+}
+
+#title .title-label {
+  margin: 0px;
+  padding: 0px;
+}
+
+#title hr {
+  margin-left: 5px;
+  margin-right: 5px;
+}
 </style>

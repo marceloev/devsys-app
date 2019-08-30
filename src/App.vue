@@ -2,10 +2,10 @@
   <div id="app">
     <main-menu>
       <div slot="menu-itens">
-        <link-menu-item index="/home" name="Home" icon="fas fa-home" tooltip="Voltar a tela principal"></link-menu-item>
-        <link-menu-item index="/cte" name="Marcelou"></link-menu-item>
-        <link-menu-item index="cte" name="Marcelou"></link-menu-item>
-        <link-menu-item index="cte" name="Marcelou"></link-menu-item>
+        <link-menu-item idx="1" index="/home" name="Home" icon="fas fa-home" tooltip="Voltar a tela principal" selected></link-menu-item>
+        <link-menu-item idx="2" index="/cte" name="Marcelou"></link-menu-item>
+        <link-menu-item idx="3" index="cte" name="Marcelou"></link-menu-item>
+        <link-menu-item idx="4" name="Marcewlou"></link-menu-item>
         <link-menu-item index="cte" name="Marcelou"></link-menu-item>
       </div>
       <router-view slot="view"></router-view>
