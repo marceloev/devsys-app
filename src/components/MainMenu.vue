@@ -12,13 +12,10 @@
     </div>
 
     <div id="page-content-wrapper">
-      <nav
-        class="navbar navbar-light bg-light border-bottom justify-content-between navbar-expand"
-        style="max-height: 45px;"
-      >
+      <nav class="navbar navbar-light bg-light border-bottom justify-content-between navbar-expand">
         <i class="fas fa-bars btn btn-dark" @click="abreFechaMenuPanel()"></i>
 
-        <form class="form-inline col-md-8">
+        <!--<form class="form-inline col-md-8">
           <input
             class="form-control col-10"
             type="search"
@@ -26,7 +23,7 @@
             aria-label="Search"
           />
           <button class="btn btn-outline-success col-of-1 col-2" type="submit">Search</button>
-        </form>
+        </form>-->
 
         <div id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
@@ -126,6 +123,10 @@ body {
 #menu-item {
   border-top: 1px solid #47748b;
   border-bottom: 1px solid #47748b;
+}
+
+#navbarDropdown {
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {
