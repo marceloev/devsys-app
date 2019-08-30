@@ -54,14 +54,15 @@
         @current-change="currentLineChanged"
         @row-dblclick="changeLayout()"
       >
-        <el-table-column prop="codigo" label="#" align="center" fixed="left" width="50"></el-table-column>
-        <el-table-column prop="razao" label="Razão Social" align="center"></el-table-column>
-        <el-table-column prop="fantasia" label="Nome Fantasia" align="center"></el-table-column>
-        <el-table-column prop="cgc" label="CPF/CNPJ" align="center"></el-table-column>
-        <el-table-column prop="ie" label="Insc. Estadual" align="center"></el-table-column>
-        <el-table-column prop="email" label="E-mail" align="center"></el-table-column>
+        <el-table-column prop="codigo" label="#" align="center" fixed="left" width="70" sortable></el-table-column>
+        <el-table-column prop="razao" label="Razão Social" align="center" sortable></el-table-column>
+        <el-table-column prop="fantasia" label="Nome Fantasia" align="center" sortable></el-table-column>
+        <el-table-column prop="cgc" label="CPF/CNPJ" align="center" sortable></el-table-column>
+        <el-table-column prop="ie" label="Insc. Estadual" align="center" sortable></el-table-column>
+        <el-table-column prop="email" label="E-mail" align="center" sortable></el-table-column>
         <el-table-column type="expand" label="Endereço" width="80">
           <template scope="scope">
+            <p><b><u>:: Informações detalhadas do Endereço ::</u></b></p>
             <p>Bairo: {{ scope.row.bairro }}</p>
             <p>Logradouro: {{ scope.row.logradouro }}</p>
             <p>Nº: {{ scope.row.numero }}</p>
@@ -183,10 +184,10 @@ export default {
           fantasia: "Clarinha",
           ie: null,
           email: "marcelo@gmail.com",
-          logradouro: null,
-          numero: null,
-          complemento: null,
-          bairro: null,
+          logradouro: "Rua do Marcelo",
+          numero: 69,
+          complemento: "Eu sou um puta complementão",
+          bairro: "Cidade Jardim",
           cpf: true
         },
         {
@@ -248,7 +249,7 @@ export default {
   },
   created: function() {
     this.service = new EmpresaService(this.$http);
-    console.log(axios)
+    //console.log(axios)
     Loading.service(loadingProps).close();
   }
 };
@@ -277,5 +278,9 @@ var loadingProps = {
 #title hr {
   margin-left: 5px;
   margin-right: 5px;
+}
+
+#modo-formulario {
+  padding-top: 20px;
 }
 </style>

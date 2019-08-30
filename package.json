@@ -1,7 +1,7 @@
 {
   "name": "devsys-app",
   "version": "1.0.0",
-  "description": "App Frontend Devsys",
+  "description": "Frontend Devsys",
   "author": "Marcelo Costa Domingues <marceloevo@gmail.com>",
   "private": true,
   "scripts": {
