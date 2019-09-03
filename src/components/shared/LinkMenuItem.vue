@@ -36,10 +36,6 @@ export default {
       default: "",
       type: String
     },
-    classPath: {
-      default: "",
-      type: String
-    },
     selected: {
       default: false,
       type: Boolean
@@ -69,10 +65,22 @@ export default {
     if (!this.$isEmpty(this.idx)) {
       this.classPath = this.$options.name + this.idx;
       this.$el.classList.add(this.classPath);
-    };
+    }
 
     if (this.selected) {
       this.setSelectedIndex();
+    }
+  },
+  computed: {
+    classPath: {
+      // getter
+      get: function() {
+        return this.class;
+      },
+      // setter
+      set: function(newValue) {
+        this.class = newValue;
+      }
     }
   }
 };
