@@ -22,5 +22,20 @@ export default {
         Vue.prototype.$valueOrDefault = (value, defaultValue) => {
             return (isEmpty(value) ? defaultValue : value);
         };
+
+        Vue.prototype.$booleanToString = (arg) => {
+            return (booleanToString(arg));
+        };
+
+        function booleanToString(arg) {
+            if (arg instanceof String) {
+                var value = arg.toString().toUpperCase();
+                return (value === 'S' || value === 'SIM');
+            } else if (arg instanceof Boolean) {
+                return arg;
+            } else {
+                return false;
+            }
+        }
     }
 }

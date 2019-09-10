@@ -6,6 +6,7 @@
                     <link-sub-menu index="1" name="Cadastros" tooltip="Veja as opções de cadastros" icon="fas fa-info">
                         <div slot="sub-menu-itens">
                             <link-menu-item index="/empresas" name="Empresas" tooltip="Acessar a tela de Empresas" icon="far fa-building" classe="p-r-0"></link-menu-item>
+                            <link-menu-item index="/users" name="Usuários" tooltip="Acessar a tela de Usuários" icon="fa fa-users"></link-menu-item>
                             <link-menu-item index="/parceiros" name="Parceiros" tooltip="Acessar a tela de Parceiros" icon="far fa-handshake"></link-menu-item>
                         </div>
                     </link-sub-menu>

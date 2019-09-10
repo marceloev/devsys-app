@@ -8,6 +8,7 @@ import locale from 'element-ui/lib/locale/lang/pt-br'
 import configRouter from '../static/routes'
 import DvsHttps from '../static/DvsHttp'
 import StringUtils from '../static/StringUtils'
+import FormatterUtils from '../static/FormatterUtils'
 import MessageUtils from '../static/MessageUtils'
 
 // Vue.use(VueResource)
@@ -20,6 +21,7 @@ Vue.use(ElementUI, { locale })
 Vue.use(DvsHttps)
 Vue.use(StringUtils)
 Vue.use(MessageUtils)
+Vue.use(FormatterUtils)
 
 const router = new VueRouter({
     routes: configRouter,

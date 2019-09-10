@@ -32,33 +32,37 @@
         <div id="modo-formulario" v-show="modoFormulario">
             <el-form ref="form" label-width="120px" size="mini">
                 <el-form-item label="Código:" size="mini" required>
-                    <el-input v-model="parceiro.codigo" type="number" disabled></el-input>
+                    <el-input v-model="empresa.codigo" type="number" disabled></el-input>
+                </el-form-item>
+                <el-form-item label="Ativo:" size="mini" required>
+                  <el-switch v-model="empresa.ativo" v-on:input="notifyEdit()" active-value="S" inactive-value="N"></el-switch>
                 </el-form-item>
                 <el-form-item label="Razão Social:" size="mini" required>
-                    <el-input v-model="parceiro.razao" type="text" v-on:input="notifyEdit()" maxlength="150" show-word-limit clearable></el-input>
+                    <el-input v-model="empresa.razaoSocial" type="text" v-on:input="notifyEdit()" maxlength="150" show-word-limit clearable></el-input>
                 </el-form-item>
                 <el-form-item label="Nome Fantasia:" size="mini" required>
-                    <el-input v-model="parceiro.fantasia" type="text" v-on:input="notifyEdit()" maxlength="150" show-word-limit clearable></el-input>
+                    <el-input v-model="empresa.nomeFantasia" type="text" v-on:input="notifyEdit()" maxlength="150" show-word-limit clearable></el-input>
                 </el-form-item>
                 <el-form-item label="CPF/CNPJ:" size="mini" required>
-                    <el-input v-model="parceiro.cgc" :value="parceiro.cgc" v-on:input="notifyEdit()"></el-input>
+                    <el-input v-model="empresa.cgc" :value="empresa.cgc" v-on:input="notifyEdit()"></el-input>
                 </el-form-item>
                 <el-form-item label="Insc. Estadual:" size="mini" required>
-                    <el-input v-model="parceiro.ie" type="text" v-on:input="notifyEdit()" maxlength="20" show-word-limit clearable></el-input>
+                    <el-input v-model="empresa.ie" type="text" v-on:input="notifyEdit()" maxlength="20" show-word-limit clearable></el-input>
                 </el-form-item>
                 <el-form-item label="E-mail:" size="mini" required>
-                    <el-input v-model="parceiro.email" type="text" v-on:input="notifyEdit()" maxlength="150" show-word-limit clearable></el-input>
+                    <el-input v-model="empresa.email" type="text" v-on:input="notifyEdit()" maxlength="150" show-word-limit clearable></el-input>
                 </el-form-item>
                 <el-form-item label="Bairro:" size="mini" required>
-                    <el-input v-model="parceiro.bairro" type="text" v-on:input="notifyEdit()" maxlength="20" show-word-limit clearable></el-input>
+                    <el-input v-model="empresa.bairro" type="text" v-on:input="notifyEdit()" maxlength="20" show-word-limit clearable></el-input>
                 </el-form-item>
             </el-form>
         </div>
         <div id="modo-grade" v-show="!modoFormulario">
             <el-table ref="tabela" :data="rows" border style="width: 100%" size="mini" stripe resizable highlight-current-row @current-change="currentLineChanged" @row-dblclick="changeLayout()" :default-sort="{prop: 'codigo'}">
                 <el-table-column prop="codigo" label="#" align="center" fixed="left" width="70" sortable></el-table-column>
-                <el-table-column prop="razao" label="Razão Social" align="center" sortable></el-table-column>
-                <el-table-column prop="fantasia" label="Nome Fantasia" align="center" sortable></el-table-column>
+                <el-table-column prop="ativo" label="Ativo" align="center" sortable></el-table-column>
+                <el-table-column prop="razaoSocial" label="Razão Social" align="center" sortable></el-table-column>
+                <el-table-column prop="nomeFantasia" label="Nome Fantasia" align="center" sortable></el-table-column>
                 <el-table-column prop="cgc" label="CPF/CNPJ" align="center" sortable></el-table-column>
                 <el-table-column prop="ie" label="Insc. Estadual" align="center" sortable></el-table-column>
                 <el-table-column prop="email" label="E-mail" align="center" sortable></el-table-column>
@@ -88,13 +92,13 @@ export default {
       persisting: false,
       filtro: "",
       selectedRow: undefined,
-      parceiro: {},
-      parceiros: []
+      empresa: {},
+      empresas: []
     };
   },
   computed: {
     rows: function () {
-      return this.parceiros.filter(row => !this.filtro || JSON.stringify(Object.values(row)).toUpperCase().indexOf(this.filtro.toUpperCase()) > -1);
+      return this.empresas.filter(row => !this.filtro || JSON.stringify(Object.values(row)).toUpperCase().indexOf(this.filtro.toUpperCase()) > -1);
     }
   },
   methods: {
@@ -102,7 +106,7 @@ export default {
       if (!changed) this.modoFormulario = !this.modoFormulario;
 
       if (this.modoFormulario) {
-        this.parceiro = Object.assign(
+        this.empresa = Object.assign(
           {},
           this.$valueOrDefault(this.selectedRow, {})
         );
@@ -114,17 +118,17 @@ export default {
     },
     buscarTodos() {
       Loading.service(loadingProps);
-      this.parceiros = [];
+      this.empresas = [];
       this.selectedRow = undefined;
       this.service
         .buscarTodos()
         .then(resp => {
-          this.parceiros = resp.data;
+          this.empresas = resp.data;
           this.modoFormulario = false;
           this.changeLayout(true); //Força a ir para modo grade.
         })
         .catch(err => {
-          this.$showError(err, 'Não foi possível carregar os "Parceiros". ');
+          this.$showError(err, 'Não foi possível carregar as "Empresas". ');
         });
       Loading.service(loadingProps).close();
     },
@@ -144,23 +148,23 @@ export default {
 
       this.$showConfirm(
         "warning",
-        "Deseja realmente excluir o parceiro: " +
+        "Deseja realmente excluir a empresa: " +
         this.selectedRow.codigo +
         " - " +
-        this.selectedRow.razao +
+        this.selectedRow.razaoSocial +
         " ?"
       )
         .then(() => {
           this.service
             .excluir(this.selectedRow.codigo)
             .then(resp => {
-              this.$mensagem("success", "Parceiro excluído com sucesso");
+              this.$mensagem("success", "Empresa excluída com sucesso");
               this.buscarTodos();
               this.modoFormulario = false;
               this.changeLayout(true); //Força a ir para modo grade.
             })
             .catch(err => {
-              this.$showError(err, "Não foi possível excluir o parceiro");
+              this.$showError(err, "Não foi possível excluir a empresa");
             });
         })
         .catch(() => {
@@ -184,7 +188,7 @@ export default {
       this.modoFormulario = true;
       this.changeLayout(true); //Força a ir para modo grade.
       this.persisting = true;
-      this.parceiro.codigo = undefined;
+      this.empresa.codigo = undefined;
     },
     salvar() {
       if (!this.persisting) {
@@ -195,16 +199,16 @@ export default {
       }
 
       this.service
-        .salvar(this.parceiro)
+        .salvar(this.empresa)
         .then(resp => {
           this.persisting = false;
           this.changeLayout();
-          this.$mensagem("success", "Parceiro incluído/alterado com sucesso");
+          this.$mensagem("success", "Empresa incluída/alterada com sucesso");
           this.buscarTodos();
         })
         .catch(err => {
           console.error(err);
-          this.$showError(err, "Não foi possível incluir/alterar o parceiro");
+          this.$showError(err, "Não foi possível incluir/alterar a empresa");
         });
     },
     cancelar(force) {
@@ -239,7 +243,7 @@ export default {
       this.modoFormulario = true;
       this.changeLayout(true); //Força a ir para modo grade.
       this.persisting = true;
-      this.parceiro = {};
+      this.empresa = {};
     }, notifyEdit() {
       this.persisting = true;
     }, editar() {
@@ -272,7 +276,7 @@ export default {
 };
 
 var loadingProps = {
-  text: 'Carregando "Parceiros"...'
+  text: 'Carregando "Empresas"...'
 };
 </script>
 
