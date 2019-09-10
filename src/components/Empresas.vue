@@ -1,7 +1,7 @@
 <template>
     <div id="app" class="container-fluid">
         <div id="title" class="row">
-            <el-divider content-position="left"><h2>Parceiros</h2></el-divider>
+            <el-divider content-position="left"><h2>Empresas</h2></el-divider>
         </div>
         <div id="navigator" class="row">
             <div class="col-auto">
@@ -79,8 +79,8 @@
 <script>
 import axios from "axios";
 import { Loading } from "element-ui";
-import Empresa from "@/domain/parceiro/parceiro";
-import ParceiroService from "@/domain/parceiro/ParceiroService";
+import Empresa from "@/domain/empresa/empresa";
+import EmpresaService from "@/domain/empresa/EmpresaService";
 export default {
   data() {
     return {
@@ -266,7 +266,7 @@ export default {
   },
   created: function () {
     Loading.service(loadingProps).close();
-    this.service = new ParceiroService(axios);
+    this.service = new EmpresaService(axios);
     this.buscarTodos();
   }
 };
