@@ -1,0 +1,52 @@
+[{
+        "label": "Código",
+        "prop": "codigo",
+        "type": "number",
+        "disabled": true,
+        "required": false
+    },
+    {
+        "label": "Login",
+        "prop": "login",
+        "type": "text",
+        "mask": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "disabled": false,
+        "required": true,
+        "maxlength": 30
+    },
+    {
+        "label": "Senha",
+        "prop": "password",
+        "type": "password",
+        "disabled": false,
+        "required": true,
+        "maxlength": 80,
+        "tooltip": "Senha do usuário"
+    },
+    {
+        "label": "Nome",
+        "prop": "nome",
+        "type": "text",
+        "disabled": false,
+        "required": true,
+        "maxlength": 150,
+        "placeholder": "Nome do usuário..."
+    },
+    {
+        "label": "Data/Hora Limite Acesso",
+        "prop": "dhLimite",
+        "type": "date",
+        "disabled": false,
+        "required": false,
+        "format": "dd/MM/yyyy",
+        "tooltip": "Digite aqui a data limite para o usuário acessar o sistemão."
+    },
+    {
+        "label": "Código (Parceiro)",
+        "prop": "parceiro.codigo",
+        "type": "number",
+        "disabled": false,
+        "required": true,
+        "maxlength": 22
+    }
+]

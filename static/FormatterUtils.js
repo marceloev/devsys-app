@@ -30,7 +30,7 @@ export default {
                 return (dataDefault ? dataDefault : arg);
             } else {
                 try {
-                    return new Date(arg).toLocaleDateString('pt-BR');
+                    return new Date(arg.replace(new RegExp("-"), '/')).toLocaleDateString('pt-BR');
                 } catch (e) {
                     return e;
                 }

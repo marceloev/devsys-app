@@ -25,4 +25,9 @@ export default class BasicService {
         var finalURL = this.url + this.service + '/' + id;
         return this.axios.delete(finalURL);
     }
+
+    retrieveMetadata(nomeInstancia) {
+        var finalURL = this.url + "/metadata/campos/" + nomeInstancia;
+        return this.axios.get(finalURL);
+    };
 }

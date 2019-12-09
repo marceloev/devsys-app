@@ -1,0 +1,6 @@
+{
+    "razao": [
+        { "required": true, "message": "A Razão Social/Nome do Parceiro é obrigatória", "trigger": "blur" },
+        { "max": 15, "message": "A Razão Social/Nome do Parceiro não pode ultrapassar 150 dígitos!", "trigger": "blur" }
+    ]
+}

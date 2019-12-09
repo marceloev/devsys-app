@@ -5,7 +5,7 @@
                 <h2 v-text="name"></h2>
             </el-divider>
         </div>
-        <div id="navigator" class="row">
+        <div id="navigator" class="form-row">
             <div class="col-auto">
                 <el-button-group>
                     <el-button type="info" @click="changeLayout()">
@@ -22,7 +22,7 @@
                 </el-button-group>
             </div>
             <div class="col p-0">
-                <el-input v-model="filtro" maxlength="50" placeholder="Pesquise aqui algo ;)" prefix-icon="el-icon-search" clearable/>
+                <el-input v-model="filtro" maxlength="50" placeholder="Pesquise algo aqui ;)" prefix-icon="el-icon-search" clearable/>
             </div>
             <div class="col-auto m-0">
                 <el-tag type="info" size="medium" effect="plain" color="whitesmoke" class="font-weight-bold h-100 m-l-0" data-toggle="tooltip" data-placement="left" title="Resultados encontrados">
@@ -31,18 +31,7 @@
             </div>
         </div>
         <div id="modo-formulario" v-show="modoFormulario">
-            <el-form ref="form" label-width="120px" size="mini">
-                <el-form-item v-for="field in metadata"
-                                size="mini"  
-                                :label="field.label" 
-                                :required="field.required">
-                    <el-input v-model="data.login"
-                                :type="field.type" 
-                                :disabled="field.disabled"
-                                :format="field.format"
-                                :placeholder="field.placeholder"></el-input>
-                </el-form-item>
-            </el-form>
+            <dvs-dataform :metadata="metadata" :model="data" :persisting="notifyEdit" :rules="rules"></dvs-dataform>
         </div>
         <div id="modo-grade" v-show="!modoFormulario">
             <el-table ref="tabela" :data="filtredRow" border style="width: 100%" size="mini" stripe resizable highlight-current-row @current-change="currentLineChanged" @row-dblclick="changeLayout()">
@@ -56,8 +45,13 @@
 import axios from "axios";
 import { Loading } from "element-ui";
 import BasicService from "@/domain/basic/BasicService";
+import DataForm from "@/components/framework/dataform/DataForm";
+
 export default {
   name: 'Dynaform',
+  components: {
+    'dvs-dataform': DataForm
+  },
   props: {
     name: {
       type: String,
@@ -65,8 +59,15 @@ export default {
     }, serviceName: {
       type: String,
       required: true,
+    }, instancia: {
+      type: String,
+      required: true
     }, metadata: {
-      type: Object
+      type: Array,
+      required: true
+    }, rules: {
+      type: Object,
+      required: false
     }
   }, data() {
     return {
@@ -81,7 +82,14 @@ export default {
   computed: {
     filtredRow: function () {
       return this.rows.filter(row => !this.filtro || JSON.stringify(Object.values(row)).toUpperCase().indexOf(this.filtro.toUpperCase()) > -1);
-    }
+    }, label: (app) => (label) => {
+      return label + ":";
+    }, getFieldProp: (app) => (dataw, fieldProp) => {
+      return "1";
+      //return this.data[fieldProp];
+    }, isFieldType: (app) => (fieldType, type) => {
+      return (fieldType === type || fieldType.indexOf("|" + type + "|") > 0);
+    },
   }, beforeCreate: function () {
     Loading.service(loadingProps);
   }, created: function () {
@@ -99,6 +107,8 @@ export default {
     currentLineChanged(row) {
       if (this.persisting) this.cancelar(true);
       this.selectedRow = row;
+    }, notifyEdit() {
+      this.persisting = true;
     },
     buscarTodos() {
       Loading.service(loadingProps);
@@ -206,8 +216,6 @@ export default {
       this.changeLayout(true); //Força a ir para modo grade.
       this.persisting = true;
       this.data = {};
-    }, notifyEdit() {
-      this.persisting = true;
     }, editar() {
       if (this.persisting) {
         this.$mensagem("warning", "Salve ou Cancele as alterações atuais primeiro!");
@@ -240,5 +248,8 @@ var loadingProps = {
 #modo-grade {
   padding-bottom: 25px;
   cursor: pointer;
+}
+#form-field-item {
+  margin-bottom: 8px;
 }
 </style>

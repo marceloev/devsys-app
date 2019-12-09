@@ -1,8 +1,5 @@
 <template>
-    <dvs-dynaform name="Usuários" service-name="/users" :metadata="metadata">
-        <div slot="form-data-cols">
-            <h1>fasdfasf</h1>
-        </div>
+    <dvs-dynaform name="Usuários" service-name="/users" instancia="User" :metadata="metadata">
         <div slot="table-data-cols">
             <el-table-column prop="codigo" label="#" align="center" fixed="left" width="70" sortable></el-table-column>
             <el-table-column prop="login" label="Login" align="center" sortable></el-table-column>
@@ -20,7 +17,7 @@
             </el-table-column>
             <el-table-column prop="parceiro" type="expand" label="Parceiro" width="80">
                 <template slot-scope="scope">
-                    <div v-if="scope.row.parceiro === undefined || scope.row.parceiro === null">
+                    <div v-if="!scope.row.parceiro">
                         <p><b><u>Não há parceiro vinculado.</u></b></p>
                     </div>
                     <div v-else>
@@ -37,20 +34,15 @@
 </template>
 
 <script>
-import Dynaform from '@/components/shared/Dynaform';
+import Dynaform from '@/components/framework/dynaform/Dynaform';
+import metadataJSON from '@/components/commom/usuarios/metadata.json';
 export default {
   name: 'Users',
   components: {
     'dvs-dynaform': Dynaform
   }, data() {
     return {
-      metadata: [
-        { label: 'Código: ', prop: 'codigo', type: 'number', disabled: true, required: false },
-        { label: 'Login: ', prop: 'login', type: 'text', disabled: false, required: true },
-        { label: 'Senha: ', prop: 'senha', type: 'password', disabled: false, required: true },
-        { label: 'Nome: ', prop: 'nome', type: 'text', disabled: false, required: true },
-        { label: 'Data/Hora Limite: ', prop: 'dhLimite', type: 'date', disabled: false, required: false, format: "yyyy/MM/dd", placeholder: 'Digite aqui a data limite para o usuário acessar o sistema.'},
-      ]
+      metadata: metadataJSON
     }
   }, computed: {
     doPasswordShow: (app) => (password) => {

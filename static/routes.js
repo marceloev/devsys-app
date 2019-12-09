@@ -1,6 +1,6 @@
 import Empresas from '@/components/Empresas.vue';
-import Usuarios from '@/components/Usuarios.vue';
-import Parceiros from '@/components/Parceiros.vue';
+import Usuarios from '@/components/commom/usuarios/Usuarios.vue';
+import Parceiros from '@/components/commom/parceiros/Parceiros.vue';
 import Teste from '@/components/Teste.vue';
 
 export default [

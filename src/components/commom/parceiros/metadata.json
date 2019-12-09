@@ -1,0 +1,87 @@
+[{
+        "separator": "Geral",
+        "bold": true
+    }, {
+        "label": "Código",
+        "prop": "codigo",
+        "type": "number",
+        "disabled": true,
+        "required": false
+    },
+    {
+        "label": "CPF/CNPJ",
+        "prop": "cgc",
+        "type": "text",
+        "mask": "###.###.###-##;##.###.###/####-##",
+        "disabled": false,
+        "required": true
+    }, {
+        "label": "Razão Social",
+        "prop": "razao",
+        "type": "text",
+        "disabled": false,
+        "required": true,
+        "maxlength": 150,
+        "tooltip": "Razão Social ou Nome do parceiro"
+    }, {
+        "label": "Nome Fantasia",
+        "prop": "fantasia",
+        "type": "text",
+        "disabled": false,
+        "required": false,
+        "maxlength": 150,
+        "tooltip": "Nome Fantasia ou Apelido do parceiro"
+    }, {
+        "label": "Insc. Estadual",
+        "prop": "ie",
+        "type": "text",
+        "disabled": false,
+        "required": false,
+        "maxlength": 20,
+        "tooltip": "Inscrição Estadual ou R.G. do parceiro"
+    }, {
+        "label": "E-mail",
+        "prop": "email",
+        "type": "email",
+        "disabled": false,
+        "required": false,
+        "maxlength": 100,
+        "tooltip": "E-mail do parceiro"
+    }, {
+        "separator": "Endereço",
+        "bold": true
+    }, {
+        "label": "Bairro",
+        "prop": "bairro",
+        "type": "text",
+        "disabled": false,
+        "required": false,
+        "maxlength": 60,
+        "tooltip": "Nome do Bairro/Região do parceiro"
+    }, {
+        "label": "Logradouro",
+        "prop": "logradouro",
+        "type": "text",
+        "disabled": false,
+        "required": false,
+        "maxlength": 60,
+        "tooltip": "Nome da Rua/Logradouro do parceiro"
+    }, {
+        "label": "Nº",
+        "prop": "numero",
+        "type": "number",
+        "disabled": false,
+        "required": false,
+        "maxlength": 10,
+        "tooltip": "Nro da residência onde o parceiro se localiza"
+    }, {
+        "label": "Complemento",
+        "prop": "complemento",
+        "type": "textarea",
+        "disabled": false,
+        "required": false,
+        "maxlength": 1000,
+        "rows": 4,
+        "tooltip": "Complemento do Endereço do parceiro"
+    }
+]
