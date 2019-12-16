@@ -1,5 +1,5 @@
 <template>
-    <dvs-dynaform name="Parceiros" service-name="/parceiros" instancia="Parceiro" :metadata="metadata">
+    <dvs-dynaform name="Parceiros" service-name="/parceiros" instancia="Parceiro" :metadata="metadata" :rules="rules">
       <div slot="table-data-cols">
         <el-table-column prop="codigo" label="#" align="center" fixed="left" width="70" sortable></el-table-column>
       </div>

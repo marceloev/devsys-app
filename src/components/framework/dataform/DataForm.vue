@@ -2,7 +2,7 @@
     <el-form id="form-fields" label-width="auto" ref="form" size="mini" :model="model" :rules="rules">
       <div v-for="field in metadata"> 
         <el-divider v-if="field.separator" content-position="left"> {{field.separator}}</el-divider>
-        <el-form-item v-else v-bind="getFieldItem(field)">
+        <el-form-item v-else v-bind="getFieldItem(field)" class="field-item">
           <el-input v-model="model[field.prop]" @input="persisting" v-bind="getFieldOptions(field)"></el-input>
         </el-form-item>
       </div>
@@ -82,8 +82,8 @@ $(function () {
 </script>
 
 <style scoped>
-.field {
+.field-item {
   padding: 1px 1px 1px 1px;
-  margin: 0px 0px 0px 0px;
+  margin: 12px 0px 0px 0px;
 }
 </style>

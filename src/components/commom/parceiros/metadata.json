@@ -32,7 +32,7 @@
         "maxlength": 150,
         "tooltip": "Nome Fantasia ou Apelido do parceiro"
     }, {
-        "label": "Insc. Estadual",
+        "label": "Insc. Estadual/RG",
         "prop": "ie",
         "type": "text",
         "disabled": false,
