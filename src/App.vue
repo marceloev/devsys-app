@@ -24,9 +24,9 @@
 </template>
 
 <script>
-import MainMenu from "@/components/MainMenu.vue";
-import LinkSubMenu from "@/components/shared/LinkSubMenu"
-import LinkMenuItem from "@/components/shared/LinkMenuItem";
+import MainMenu from "@/components/framework/mainmenu/MainMenu.vue";
+import LinkSubMenu from "@/components/framework/mainmenu/LinkSubMenu.vue"
+import LinkMenuItem from "@/components/framework/mainmenu/LinkMenuItem.vue";
 
 export default {
   name: "App",
