@@ -195,7 +195,7 @@ export default {
       if (force) {
         if (this.persisting) {
           this.persisting = false;
-          this.$mensagem("warning", "Alterações em andamento canceladas forçadamento!");
+          this.$mensagem("warning", "Alterações em andamento canceladas forçadamente!");
         };
       } else {
         this.$showConfirm("warning", "Deseje realmente cancelar as alterações?")
