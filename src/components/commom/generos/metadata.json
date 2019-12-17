@@ -1,0 +1,20 @@
+[
+    {
+        "separator": "Geral",
+        "bold": true
+    },
+    {
+        "label": "Código",
+        "prop": "codigo",
+        "type": "number",
+        "disabled": true,
+        "required": false
+    },
+    {
+        "label": "Nome",
+        "prop": "nome",
+        "type": "text",
+        "disabled": false,
+        "required": true
+    }
+]

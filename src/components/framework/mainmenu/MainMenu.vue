@@ -12,43 +12,45 @@
     </div>
 
     <div id="page-content-wrapper">
-      <nav class="navbar navbar-light bg-light border-bottom justify-content-between navbar-expand">
+      <nav class="navbar navbar-light bg-light border-bottom navbar-expand">
+        <!--justify-content-between-->
         <i class="fas fa-bars btn btn-dark" @click="abreFechaMenuPanel()"></i>
+        <!--<button class="btn btn-outline-success col-of-1 col-2" type="submit">Search</button>-->
 
-        <!--<form class="form-inline col-md-8">
-          <input
-            class="form-control col-10"
-            type="search"
-            placeholder="Pesquise aqui algum livro"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success col-of-1 col-2" type="submit">Search</button>
-        </form>-->
-
-        <div id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link"
-                id="navbarDropdown"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i class="fas fa-ellipsis-v"></i>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <h6 class="dropdown-header">
-                  <i class="fas fa-tools"></i> Outras Opções
-                </h6>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-          </ul>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto"></ul>
+          <form class="form-inline col-lg-2 col-sm-3" id="formSearchTela">
+            <input
+              class="form-control w-100"
+              type="search"
+              placeholder="Pesquise aqui algum livro"
+              aria-label="Search"
+              @focus="searchingTela(true)"
+              @blur="searchingTela(false)"/>
+          </form>
+          <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link"
+                  id="navbarDropdown"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  <h6 class="dropdown-header">
+                    <i class="fas fa-tools"></i> Outras Opções
+                  </h6>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+            </ul>
         </div>
       </nav>
       <div class="container-fluid p-0 m-0 h-100 w-100">
@@ -67,6 +69,10 @@ export default {
   methods: {
     abreFechaMenuPanel() {
       $("#wrapper").toggleClass("toggled");
+    }, searchingTela(isSearching) {
+      var size = (isSearching ? 500 : 100);
+      $("#formSearchTela").width(size);
+      console.log("fui? " + isSearching)
     }
   },
   beforeCreate: function() {
