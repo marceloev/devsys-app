@@ -270,7 +270,7 @@ export default {
   },
   created: function () {
     Loading.service(loadingProps).close();
-    this.service = new EmpresaService(axios);
+    this.service = new EmpresaService(axios, "/empresas");
     this.buscarTodos();
   }
 };

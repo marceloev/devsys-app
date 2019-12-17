@@ -1,0 +1,51 @@
+[
+    {
+        "separator": "Geral",
+        "bold": true
+    },
+    {
+        "label": "Código",
+        "prop": "codigo",
+        "type": "number",
+        "disabled": true,
+        "required": false
+    },
+    {
+        "label": "Descrição",
+        "prop": "descricao",
+        "type": "text",
+        "disabled": false,
+        "required": true
+    },
+    {
+        "label": "Nome",
+        "prop": "nome",
+        "type": "text",
+        "disabled": false,
+        "required": false
+    },
+    {
+        "label": "Data Primeiro Episódio",
+        "prop": "dataPrimeiroEpisodio",
+        "type": "date",
+        "disabled": false,
+        "required": true
+    },
+    {
+        "label": "Data Último Episódio",
+        "prop": "dataUltimoEpisodio",
+        "type": "date",
+        "disabled": false,
+        "required": false
+    },
+    {
+        "label": "Sinopse",
+        "prop": "sinopse",
+        "type": "textarea",
+        "disabled": false,
+        "required": false,
+        "maxlength": 1000,
+        "rows": 6,
+        "tooltip": "Sinopse da série"
+    }
+]

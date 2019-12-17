@@ -1,7 +1,9 @@
-[{
+[
+    {
         "separator": "Geral",
         "bold": true
-    }, {
+    },
+    {
         "label": "Código",
         "prop": "codigo",
         "type": "number",
@@ -15,7 +17,8 @@
         "mask": "###.###.###-##;##.###.###/####-##",
         "disabled": false,
         "required": true
-    }, {
+    },
+    {
         "label": "Razão Social",
         "prop": "razao",
         "type": "text",
@@ -23,7 +26,8 @@
         "required": true,
         "maxlength": 150,
         "tooltip": "Razão Social ou Nome do parceiro"
-    }, {
+    },
+    {
         "label": "Nome Fantasia",
         "prop": "fantasia",
         "type": "text",
@@ -31,7 +35,8 @@
         "required": false,
         "maxlength": 150,
         "tooltip": "Nome Fantasia ou Apelido do parceiro"
-    }, {
+    },
+    {
         "label": "Insc. Estadual/RG",
         "prop": "ie",
         "type": "text",
@@ -39,7 +44,8 @@
         "required": false,
         "maxlength": 20,
         "tooltip": "Inscrição Estadual ou R.G. do parceiro"
-    }, {
+    },
+    {
         "label": "E-mail",
         "prop": "email",
         "type": "email",
@@ -47,10 +53,12 @@
         "required": false,
         "maxlength": 100,
         "tooltip": "E-mail do parceiro"
-    }, {
+    },
+    {
         "separator": "Endereço",
         "bold": true
-    }, {
+    },
+    {
         "label": "Bairro",
         "prop": "bairro",
         "type": "text",
@@ -58,7 +66,8 @@
         "required": false,
         "maxlength": 60,
         "tooltip": "Nome do Bairro/Região do parceiro"
-    }, {
+    },
+    {
         "label": "Logradouro",
         "prop": "logradouro",
         "type": "text",
@@ -66,7 +75,8 @@
         "required": false,
         "maxlength": 60,
         "tooltip": "Nome da Rua/Logradouro do parceiro"
-    }, {
+    },
+    {
         "label": "Nº",
         "prop": "numero",
         "type": "number",
@@ -74,7 +84,8 @@
         "required": false,
         "maxlength": 10,
         "tooltip": "Nro da residência onde o parceiro se localiza"
-    }, {
+    },
+    {
         "label": "Complemento",
         "prop": "complemento",
         "type": "textarea",

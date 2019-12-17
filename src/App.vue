@@ -8,6 +8,7 @@
                             <link-menu-item index="/empresas" name="Empresas" tooltip="Acessar a tela de Empresas" icon="far fa-building" classe="p-r-0"></link-menu-item>
                             <link-menu-item index="/users" name="Usuários" tooltip="Acessar a tela de Usuários" icon="fa fa-users"></link-menu-item>
                             <link-menu-item index="/parceiros" name="Parceiros" tooltip="Acessar a tela de Parceiros" icon="far fa-handshake"></link-menu-item>
+                            <link-menu-item index="/series" name="Series" tooltip="Acessar a tela de Séries" icon="far fa-handshake"></link-menu-item>
                         </div>
                     </link-sub-menu>
                     <link-sub-menu index="2" name="Processos" tooltip="Vamos a alguns processos" icon="fas fa-people-carry">
