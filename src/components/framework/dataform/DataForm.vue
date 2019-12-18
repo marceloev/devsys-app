@@ -84,6 +84,7 @@ $(function () {
 <style scoped>
 .field-form-separator {
   padding: 0px;
-  margin: 0px;
+  margin: 10px 0px 20px 0px;
+
 }
 </style>

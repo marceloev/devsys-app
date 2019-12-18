@@ -19,15 +19,7 @@
 
         <div id="navbarSupportedContent" class="collapse navbar-collapse">
           <ul class="navbar-nav ml-auto"></ul>
-          <form class="form-inline col-lg-2 col-sm-3" id="formSearchTela">
-            <input
-              class="form-control w-100"
-              type="search"
-              placeholder="Pesquise aqui algum livro"
-              aria-label="Search"
-              @focus="searchingTela(true)"
-              @blur="searchingTela(false)"/>
-          </form>
+          <sapp-search-frame :searchingListener="searchingTela"/>
           <ul class="navbar-nav">
               <li class="nav-item dropdown">
                 <a
@@ -62,7 +54,12 @@
 
 <script>
 import { Loading } from "element-ui";
+import SearchFrame from "@/components/framework/mainmenu/SearchFrame.vue";
 export default {
+  name: 'MainMenu',
+  components: {
+    'sapp-search-frame': SearchFrame
+  },
   data() {
     return {};
   },
@@ -70,15 +67,14 @@ export default {
     abreFechaMenuPanel() {
       $("#wrapper").toggleClass("toggled");
     }, searchingTela(isSearching) {
-      var size = (isSearching ? 500 : 100);
+      var size = (isSearching ? 300 : 200);
       $("#formSearchTela").width(size);
-      console.log("fui? " + isSearching)
     }
   },
-  beforeCreate: function() {
+  beforeCreate: function () {
     Loading.service(loadingProps);
   },
-  created: function() {
+  created: function () {
     Loading.service(loadingProps).close();
     this.abreFechaMenuPanel();
   }

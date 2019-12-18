@@ -32,10 +32,26 @@ import LinkMenuItem from "@/components/framework/mainmenu/LinkMenuItem.vue";
 
 export default {
   name: "App",
+  data() {
+    return {
+      pressingCtrl: false,
+    }
+  },
   components: {
     "main-menu": MainMenu,
     "link-sub-menu": LinkSubMenu,
     "link-menu-item": LinkMenuItem
+  }, mounted() {
+
+    $(document).keyup(function (e) {  //O evento Kyeup é acionado quando as teclas são soltas
+      if (e.which == 17) this.pressingCtrl = false; //Quando qualuer tecla for solta é preciso informar que Crtl não está pressionada
+    })
+    $(document).keydown(function (e) { //Quando uma tecla é pressionada
+      if (e.which == 17) this.pressingCtrl = true; //Informando que Crtl está acionado
+      if ((e.which == 75 || e.keyCode == 75) && this.pressingCtrl == true) { //Reconhecendo tecla Enter
+        $("#searchFrameInput").focus();
+      }
+    });
   }
 };
 </script>
