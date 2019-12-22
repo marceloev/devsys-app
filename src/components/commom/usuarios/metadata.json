@@ -42,11 +42,15 @@
         "tooltip": "Digite aqui a data limite para o usuário acessar o sistemão."
     },
     {
-        "label": "Código (Parceiro)",
-        "prop": "parceiro.codigo",
-        "type": "number",
-        "disabled": false,
-        "required": true,
-        "maxlength": 22
+        "relational": true,
+        "prop": "parceiro",
+        "label": "Parceiro",
+        "id": "codigo",
+        "presentation": "razao",
+        "entidade": "Parceiro",
+        "endpoint": "/parceiros",
+        "alias": "P",
+        "criterio": "P.razao like concat(':!', :arg, ':!')",
+        "max": 5
     }
 ]

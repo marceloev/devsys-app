@@ -27,6 +27,18 @@ export default class BasicService {
         return this.axios.delete(finalURL);
     }
 
+    findRelationalEntityByQuery(entity, alias, criterio, stringQuery, max) {
+        let finalURL = this.url + this.service + '/findByQuery';
+        const queryParams = {
+            entidade: entity,
+            alias: alias,
+            criterio: criterio,
+            stringQuery: stringQuery,
+            max: max
+        };
+        return this.axios.get(finalURL, { params: queryParams });
+    };
+
     retrieveMetadata(nomeInstancia) {
         var finalURL = this.url + "/metadata/campos/" + nomeInstancia;
         return this.axios.get(finalURL);

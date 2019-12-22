@@ -3,15 +3,29 @@
       <div v-for="field in metadata"> 
         <el-divider v-if="field.separator" content-position="left" class="field-form-separator"> {{field.separator}}</el-divider>
         <el-form-item v-else v-bind="getFieldItem(field)" class="field-form-item">
-          <el-input v-model="model[field.prop]" @input="persisting" v-bind="getFieldOptions(field)"></el-input>
+            <sapp-relational-field v-if="field.relational" 
+              :instancia="model[field.prop]"
+              :id="field.id"
+              :presentation="field.presentation" 
+              :persisting="persisting"
+              :entidade="field.entidade" 
+              :alias="field.alias"
+              :criterio="field.criterio"
+              :endpoint="field.endpoint"
+              :max="field.max"></sapp-relational-field>
+          <el-input v-else v-model="model[field.prop]" @input="persisting" v-bind="getFieldOptions(field)"></el-input>
         </el-form-item>
       </div>
     </el-form>
 </template>
 
 <script>
+import RelationalField from '@/components/framework/relationalField/RelationalField.vue';
 export default {
   name: 'DataForm',
+  components: {
+    'sapp-relational-field': RelationalField
+  },
   props: {
     metadata: {
       type: Array,
@@ -39,7 +53,7 @@ export default {
       return item;
     }, getFieldOptions: (app) => (options) => {
       var metadata = {};
-      
+
       metadata["class"] = "field field-input";
       metadata["type"] = options.type || 'tel';
       metadata["disabled"] = !!options.disabled;
@@ -85,6 +99,5 @@ $(function () {
 .field-form-separator {
   padding: 0px;
   margin: 10px 0px 20px 0px;
-
 }
 </style>
