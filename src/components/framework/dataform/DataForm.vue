@@ -4,7 +4,7 @@
         <el-divider v-if="field.separator" content-position="left" class="field-form-separator"> {{field.separator}}</el-divider>
         <el-form-item v-else v-bind="getFieldItem(field)" class="field-form-item">
             <sapp-relational-field v-if="field.relational" 
-              :instancia="model[field.prop]"
+              :instancia.sync="model[field.prop]"
               :id="field.id"
               :presentation="field.presentation" 
               :persisting="persisting"

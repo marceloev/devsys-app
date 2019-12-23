@@ -1,19 +1,20 @@
 <template>
-    <div class="form-inline">
-      <el-input class="rf-id" v-model="instancia[id]" @input="persisting" disabled></el-input>
-      <el-autocomplete class="rf-value"
-        popper-class="my-autocomplete"
-        v-model="rfValue"
-        :fetch-suggestions="querySearch"
-        @input="changedEntity"
-        placeholder="Digite aqui para pesquisar"
-        prefix-icon="el-icon-search"
-        @select="selectedEntity">
-          <template slot-scope="{ item }">
-            <div class="suggested-frame">{{ item[id] }} - {{ item[presentation] }}</div>
-        </template>
-      </el-autocomplete>
-    </div>
+  <div class="form-inline">
+    <el-input class="rf-id" v-model="instancia[id]" @input="persisting" disabled></el-input>
+    <el-autocomplete
+      class="rf-value"
+      popper-class="my-autocomplete"
+      v-model="rfValue"
+      :fetch-suggestions="querySearch"
+      @input="changedEntity"
+      :placeholder="valueInstancia"
+      prefix-icon="el-icon-search"
+      @select="selectedEntity">
+      <template slot-scope="{ item }">
+        <div class="suggested-frame">{{ item[id] }} - {{ item[presentation] }}</div>
+      </template>
+    </el-autocomplete>
+  </div>
 </template>
 
 <script>
@@ -21,9 +22,9 @@ import axios from "axios";
 import BasicService from "@/domain/basic/BasicService";
 
 export default {
-  name: 'RelationalField',
+  name: "RelationalField",
   props: {
-    instancia: { type: Object, required: false, default: () => { } },
+    instancia: { type: Object, required: true, default: () => {} },
     id: { type: String, required: true },
     presentation: { type: String, required: true },
     persisting: { type: Function, required: true },
@@ -37,41 +38,61 @@ export default {
     return {
       entitys: [],
       rfValue: "",
-    }
-  }, created: function () {
+    };
+  },
+  created: function() {
     this.service = new BasicService(axios, this.endpoint);
-    this.rfValue = this.instancia[this.presentation];
-  }, computed: {
+    this.rfValue = (this.instancia[this.presentation]);
+  },
+  computed: {
     valueInstancia: {
-      get: function () {
-        return this.instancia;
+      get: function() {
+        return this.instancia[this.presentation];
       },
-      set: function (newValue) {
-        this.instancia = newValue;
+      set: function(newValue) {
+        this.rfValue = newValue;
       }
-    },
-    getValue: (app) => (prop) => {
-      return (this.valueInstancia == undefined ? "" : this.valueInstancia[prop]);
     }
-  }, methods: {
+  },
+  methods: {
     querySearch(queryString, cb) {
-      //var results = queryString ? rotas.filter(this.createFilter(queryString)) : [];-
-      //var results = [{ "codigo": "1", "razao": "oizão" }, { "codigo": "2", "razao": "oizin" }];
-      var results = this.service.findRelationalEntityByQuery(this.entidade, this.alias, this.criterio, "M", this.max).then(resp => {return resp.data});
-      Promise.resolve(results).then(function(v) {
-        return cb(v);
-      });
-      
+      if (!queryString) {
+        return cb([]);
+      } else {
+        var promisse = this.service
+          .findRelationalEntityByQuery(
+            this.entidade,
+            this.alias,
+            this.criterio,
+            queryString,
+            this.max
+          )
+          .then(resp => {
+            return resp.data;
+          })
+          .catch(err => {
+            console.error(err);
+            this.$showError(
+              err,
+              "Não foi possível consultar as entidades em " + this.endpoint
+            );
+          });
+        Promise.resolve(promisse).then(function(v) {
+          return cb(v);
+        });
+      }
     },
     selectedEntity(entity) {
       console.log(entity);
-      this.instancia = entity;
-    }, changedEntity() {
-      this.instancia = {};
+      this.$emit("update:instancia", entity);
+      this.rfValue = entity[this.presentation];
+    },
+    changedEntity() {
+      this.$emit("update:instancia", {});
       this.persisting();
     }
   }
-}
+};
 </script>
 
 <style scoped>
