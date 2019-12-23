@@ -1,8 +1,9 @@
 <template>
     <div class="form-inline">
-      <el-input class="rf-id" v-model="getValue(id)" @input="persisting" disabled></el-input>
+      <el-input class="rf-id" v-model="instancia[id]" @input="persisting" disabled></el-input>
       <el-autocomplete class="rf-value"
-        id="rfValue"
+        popper-class="my-autocomplete"
+        v-model="rfValue"
         :fetch-suggestions="querySearch"
         @input="changedEntity"
         placeholder="Digite aqui para pesquisar"
@@ -35,9 +36,11 @@ export default {
   data() {
     return {
       entitys: [],
+      rfValue: "",
     }
   }, created: function () {
     this.service = new BasicService(axios, this.endpoint);
+    this.rfValue = this.instancia[this.presentation];
   }, computed: {
     valueInstancia: {
       get: function () {
@@ -53,15 +56,18 @@ export default {
   }, methods: {
     querySearch(queryString, cb) {
       //var results = queryString ? rotas.filter(this.createFilter(queryString)) : [];-
-      var results = [{ "codigo": "1", "razao": "oizão" }, { "codigo": "2", "razao": "oizin" }];
-      console.log(this.service.findRelationalEntityByQuery(this.entidade, this.alias, this.criterio, "M", this.max).then(resp => { return resp.data }));
-      //results = this.service.findRelationalEntityByQuery(this.entidade, this.alias, this.criterio, "M", this.max).then(resp => {return resp.data});
-      return cb(results);
+      //var results = [{ "codigo": "1", "razao": "oizão" }, { "codigo": "2", "razao": "oizin" }];
+      var results = this.service.findRelationalEntityByQuery(this.entidade, this.alias, this.criterio, "M", this.max).then(resp => {return resp.data});
+      Promise.resolve(results).then(function(v) {
+        return cb(v);
+      });
+      
     },
     selectedEntity(entity) {
       console.log(entity);
-    }, changedEntity(entity) {
-      this.valueInstancia = entity;
+      this.instancia = entity;
+    }, changedEntity() {
+      this.instancia = {};
       this.persisting();
     }
   }
