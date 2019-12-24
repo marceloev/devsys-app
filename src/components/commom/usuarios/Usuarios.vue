@@ -9,9 +9,9 @@
                 </template>
             </el-table-column>
             <el-table-column prop="nome" label="Nome" align="left" sortable></el-table-column>
-            <el-table-column label="D/H Limite Acesso" align="left">
+            <el-table-column align="left" label="D/H Limite Acesso">
                 <template slot-scope="scope">
-                    <i class="el-icon-time"></i>
+                    <i class='el-icon-time'></i>
                     <span v-text="$formatDate(scope.row.dhLimite, '(Não Definido)')"></span>
                 </template>
             </el-table-column>
@@ -22,10 +22,10 @@
                     </div>
                     <div v-else>
                         <p><b><u>:: Informações detalhadas do Parceiro ::</u></b></p>
-                        <p>Código: {{ scope.row.parceiro.codigo }}</p>
-                        <p>Nome/Razão: {{ scope.row.parceiro.razao }}</p>
-                        <p>Apelido/Nome Fantasia: {{ scope.row.parceiro.fantasia }}</p>
-                        <p>CPF/CNPJ: {{ $formatCpfCnpj(scope.row.parceiro.cgc) }}</p>
+                        <p><b>Código: </b>{{ scope.row.parceiro.codigo }}</p>
+                        <p><b>Nome/Razão: </b>{{ scope.row.parceiro.razao }}</p>
+                        <p><b>Apelido/Nome Fantasia: </b>{{ scope.row.parceiro.fantasia }}</p>
+                        <p><b>CPF/CNPJ: </b>{{ $formatCpfCnpj(scope.row.parceiro.cgc) }}</p>
                     </div>
                 </template>
             </el-table-column>

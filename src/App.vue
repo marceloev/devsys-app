@@ -33,26 +33,13 @@ import LinkMenuItem from "@/components/framework/mainmenu/LinkMenuItem.vue";
 export default {
   name: "App",
   data() {
-    return {
-      pressingCtrl: false,
-    }
+    return {}
   },
   components: {
     "main-menu": MainMenu,
     "link-sub-menu": LinkSubMenu,
     "link-menu-item": LinkMenuItem
-  }/*, mounted() {
-
-    $(document).keyup(function (e) {  //O evento Kyeup é acionado quando as teclas são soltas
-      if (e.which == 17) this.pressingCtrl = false; //Quando qualuer tecla for solta é preciso informar que Crtl não está pressionada
-    })
-    $(document).keydown(function (e) { //Quando uma tecla é pressionada
-      if (e.which == 17) this.pressingCtrl = true; //Informando que Crtl está acionado
-      if ((e.which == 75 || e.keyCode == 75) && this.pressingCtrl == true) { //Reconhecendo tecla Enter
-        $("#searchFrameInput").focus();
-      }
-    });
-  }*/, methods: {
+  }, methods: {
     focusSearchFrame: function() {
       $("#searchFrameInput").focus();
     }
@@ -61,22 +48,8 @@ export default {
 </script>
 
 <style>
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: LightGray; }
+::-webkit-scrollbar-thumb { background: DarkGray; }
+::-webkit-scrollbar-thumb:hover { background: Black; }
 </style>

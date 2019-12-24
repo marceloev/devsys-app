@@ -34,7 +34,7 @@
             <dvs-dataform :metadata="metadata" :model="data" :persisting="notifyEdit" :rules="rules"></dvs-dataform>
         </div>
         <div id="modo-grade" v-show="!modoFormulario">
-            <el-table ref="tabela" :data="filtredRow" border style="width: 100%" size="mini" stripe resizable highlight-current-row @current-change="currentLineChanged" @row-dblclick="changeLayout()">
+            <el-table ref="tabela" :data="filtredRow" border style="width: 100%" size="small" stripe resizable highlight-current-row @current-change="currentLineChanged" @row-dblclick="changeLayout()">
                 <slot name="table-data-cols"></slot>
             </el-table>
         </div>

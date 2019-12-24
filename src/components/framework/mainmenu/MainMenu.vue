@@ -45,7 +45,7 @@
             </ul>
         </div>
       </nav>
-      <div class="container-fluid p-0 m-0 h-100 w-100">
+      <div class="container-fluid p-0 m-0 w-100">
         <slot name="view"></slot>
       </div>
     </div>
