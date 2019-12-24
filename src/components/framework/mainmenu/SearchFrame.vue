@@ -6,8 +6,9 @@
             popper-class="my-autocomplete"
             v-model="state"
             :fetch-suggestions="querySearch"
-            placeholder="Please input"
+            placeholder="Alguma tela específica?"
             prefix-icon="el-icon-search"
+            clearable
             @select="handleSelect"
             @focus="isSearching(true)"
             @blur="isSearching(false)"

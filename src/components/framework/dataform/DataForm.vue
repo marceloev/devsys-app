@@ -6,12 +6,9 @@
             <sapp-relational-field v-if="field.relational" 
               :instancia.sync="model[field.prop]"
               :id="field.id"
+              :field="field"
               :presentation="field.presentation" 
               :persisting="persisting"
-              :entidade="field.entidade" 
-              :alias="field.alias"
-              :criterio="field.criterio"
-              :endpoint="field.endpoint"
               :max="field.max"></sapp-relational-field>
           <el-input v-else v-model="model[field.prop]" @input="persisting" v-bind="getFieldOptions(field)"></el-input>
         </el-form-item>

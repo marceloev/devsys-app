@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" @keyup.ctrl.alt.75="focusSearchFrame">
         <main-menu>
             <div slot="menu-itens">
                 <el-menu default-active="1" class="el-menu-vertical-demo" router>
@@ -41,7 +41,7 @@ export default {
     "main-menu": MainMenu,
     "link-sub-menu": LinkSubMenu,
     "link-menu-item": LinkMenuItem
-  }, mounted() {
+  }/*, mounted() {
 
     $(document).keyup(function (e) {  //O evento Kyeup é acionado quando as teclas são soltas
       if (e.which == 17) this.pressingCtrl = false; //Quando qualuer tecla for solta é preciso informar que Crtl não está pressionada
@@ -52,6 +52,10 @@ export default {
         $("#searchFrameInput").focus();
       }
     });
+  }*/, methods: {
+    focusSearchFrame: function() {
+      $("#searchFrameInput").focus();
+    }
   }
 };
 </script>
