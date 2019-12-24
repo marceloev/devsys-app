@@ -7,7 +7,7 @@ export default {
         function formatCpfCnpj(arg) {
             arg = ("" + arg).replace(/\D/g, ""); //Remove tudo o que não é dígito
 
-            if (arg === undefined || arg === null || arg.length === 0) {
+            if (!arg || arg.length === 0) {
                 /* Ignore */
             } else if (arg.length < 14) { //CPF
                 arg = arg.replace(/(\d{3})(\d)/, "$1.$2");
@@ -26,11 +26,11 @@ export default {
         Vue.prototype.$formatDate = (arg, dataDefault) => formatDate(arg, dataDefault);
 
         function formatDate(arg, dataDefault) {
-            if (arg === undefined || arg === null || arg.length === 0) {
-                return (dataDefault ? dataDefault : arg);
+            if (!arg) {
+                return dataDefault;
             } else {
                 try {
-                    return new Date(arg.replace(new RegExp("-"), '/')).toLocaleDateString('pt-BR');
+                    return new Date(arg).toLocaleDateString('pt-BR');
                 } catch (e) {
                     return e;
                 }
