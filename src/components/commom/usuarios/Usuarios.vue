@@ -1,15 +1,15 @@
 <template>
     <dvs-dynaform name="Usuários" service-name="/users" instancia="User" :metadata="metadata">
         <div slot="table-data-cols">
-            <el-table-column prop="codigo" label="#" align="center" fixed="left" width="70" sortable></el-table-column>
-            <el-table-column prop="login" label="Login" align="center" sortable></el-table-column>
-            <el-table-column label="Senha" align="center" sortable>
+            <el-table-column prop="codigo" label="#" align="right" fixed="left" width="70" sortable></el-table-column>
+            <el-table-column prop="login" label="Login" align="left" sortable></el-table-column>
+            <el-table-column label="Senha" align="left" sortable>
                 <template slot-scope="scope">
                      <span v-text="doPasswordShow(scope.row.password)"></span>
                 </template>
             </el-table-column>
-            <el-table-column prop="nome" label="Nome" align="center" sortable></el-table-column>
-            <el-table-column label="D/H Limite Acesso" align="center">
+            <el-table-column prop="nome" label="Nome" align="left" sortable></el-table-column>
+            <el-table-column label="D/H Limite Acesso" align="left">
                 <template slot-scope="scope">
                     <i class="el-icon-time"></i>
                     <span v-text="$formatDate(scope.row.dhLimite, '(Não Definido)')"></span>

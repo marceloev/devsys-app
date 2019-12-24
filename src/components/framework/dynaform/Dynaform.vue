@@ -202,7 +202,7 @@ export default {
           .then(() => {
             this.persisting = false;
             this.changeLayout();
-            this.$mensagem("success", "Alterações canceladas com sucesso!");
+            this.$mensagem("warning", "Alterações canceladas!");
           });
       }
     },

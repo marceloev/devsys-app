@@ -5,7 +5,7 @@ export default {
         Vue.prototype.$formatCpfCnpj = (arg) => formatCpfCnpj(arg);
 
         function formatCpfCnpj(arg) {
-            arg = arg.replace(/\D/g, ""); //Remove tudo o que não é dígito
+            arg = ("" + arg).replace(/\D/g, ""); //Remove tudo o que não é dígito
 
             if (arg === undefined || arg === null || arg.length === 0) {
                 /* Ignore */
