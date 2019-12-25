@@ -45,7 +45,7 @@
             </ul>
         </div>
       </nav>
-      <div class="container-fluid p-0 m-0 w-100">
+      <div class="container-fluid active-page">
         <slot name="view"></slot>
       </div>
     </div>
@@ -86,63 +86,19 @@ var loadingProps = {
 </script>
 
 <style scoped>
-body {
-  overflow-x: hidden;
-}
-
-#sidebar-wrapper {
-  background-color: #7386d5;
-  min-height: 100vh;
-  margin-left: -15rem;
-  -webkit-transition: margin 0.25s ease-out;
-  -moz-transition: margin 0.25s ease-out;
-  -o-transition: margin 0.25s ease-out;
-  transition: margin 0.25s ease-out;
-}
-
-#sidebar-wrapper .sidebar-heading {
-  padding: 0.875rem 1.25rem;
-  font-size: 1.2rem;
-}
-
-.sidebar-heading {
-  color: white;
-  margin-bottom: 40px;
-}
-
-#sidebar-wrapper .list-group {
-  width: 15rem;
-}
-
-#page-content-wrapper {
-  min-width: 100vw;
-}
-
-#wrapper.toggled #sidebar-wrapper {
-  margin-left: 0;
-}
-
-#menu-item {
-  border-top: 1px solid #47748b;
-  border-bottom: 1px solid #47748b;
-}
-
-#navbarDropdown {
-  cursor: pointer;
-}
+#sidebar-wrapper { background-color: #7386d5; min-height: 100vh; margin-left: -15rem; -webkit-transition: margin 0.25s ease-out; 
+  -moz-transition: margin 0.25s ease-out; -o-transition: margin 0.25s ease-out; transition: margin 0.25s ease-out; }
+#sidebar-wrapper .sidebar-heading { padding: 0.875rem 1.25rem; font-size: 1.2rem; color: white; margin-bottom: 2rem }
+#sidebar-wrapper .list-group { width: 15rem; }
+#page-content-wrapper { min-width: 100vw; min-height: 100vh; display: flex; flex-direction: column; background-color: white; }
+#page-content-wrapper .active-page { padding: 0px; margin: 0px; width: 100%; flex-grow: 1; }
+#wrapper.toggled #sidebar-wrapper { margin-left: 0; }
+#menu-item { border-top: 1px solid #47748b; border-bottom: 1px solid #47748b; }
+#navbarDropdown { cursor: pointer; }
 
 @media (min-width: 768px) {
-  #sidebar-wrapper {
-    margin-left: 0;
-  }
-
-  #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
-  }
-
-  #wrapper.toggled #sidebar-wrapper {
-    margin-left: -15rem;
-  }
+  #sidebar-wrapper { margin-left: 0; }
+  #page-content-wrapper { min-width: 0; width: 100%; min-height: 0; height: inherit; }
+  #wrapper.toggled #sidebar-wrapper { margin-left: -15rem; }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div id="app" @keyup.ctrl.alt.75="focusSearchFrame">
+    <div id="app">
         <main-menu>
             <div slot="menu-itens">
                 <el-menu default-active="1" class="el-menu-vertical-demo" router>
@@ -33,7 +33,9 @@ import LinkMenuItem from "@/components/framework/mainmenu/LinkMenuItem.vue";
 export default {
   name: "App",
   data() {
-    return {}
+    return {
+      pressingCtrl: false,
+    }
   },
   components: {
     "main-menu": MainMenu,
@@ -41,8 +43,19 @@ export default {
     "link-menu-item": LinkMenuItem
   }, methods: {
     focusSearchFrame: function() {
+      //@keyup.ctrl.alt.75="focusSearchFrame"
       $("#searchFrameInput").focus();
     }
+  }, mounted() {
+    $(document).keyup(function (e) {  //O evento Kyeup é acionado quando as teclas são soltas
+      if (e.which == 17) this.pressingCtrl = false; //Quando qualuer tecla for solta é preciso informar que Crtl não está pressionada
+    })
+    $(document).keydown(function (e) { //Quando uma tecla é pressionada
+      if (e.which == 17) this.pressingCtrl = true; //Informando que Crtl está acionado
+      if ((e.which == 75 || e.keyCode == 75) && this.pressingCtrl == true) { //Reconhecendo tecla Enter
+        this.focusSearchFrame();
+      }
+    });
   }
 };
 </script>

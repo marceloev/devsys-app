@@ -1,5 +1,5 @@
 <template>
-    <div id="background">
+    <div id="background" class="h-100">
 
     </div>
 </template>
@@ -13,7 +13,5 @@ export default {
 <style scoped>
 #background {
     background-color: red;
-    height: 100vh;
-    width: 100vw;
 }
 </style>
