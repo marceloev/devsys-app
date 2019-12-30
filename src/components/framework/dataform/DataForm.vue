@@ -1,5 +1,5 @@
 <template>
-    <el-form id="form-fields" label-width="auto" ref="form" size="mini" :model="model" :rules="rules">
+    <el-form id="form-fields" label-width="auto" ref="form" size="mini" :model="model" :rules="rules" :show-message="!!rules">
       <div v-for="field in metadata"> 
         <el-divider v-if="field.separator" content-position="left" class="field-form-separator"> {{field.separator}}</el-divider>
         <el-form-item v-else v-bind="getFieldItem(field)" class="field-form-item">

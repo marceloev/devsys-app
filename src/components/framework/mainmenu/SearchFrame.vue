@@ -9,6 +9,7 @@
             placeholder="Alguma tela específica?"
             prefix-icon="el-icon-search"
             clearable
+            highlight-first-item
             @select="handleSelect"
             @focus="isSearching(true)"
             @blur="isSearching(false)"

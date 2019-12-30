@@ -1,9 +1,15 @@
 <template>
   <div class="form-inline">
-    <el-input class="rf-id" v-model="instancia[id]" @input="persisting" disabled></el-input>
+    <el-input
+      class="rf-id"
+      v-model="value[id]"
+      @input="persisting"
+      disabled
+      prefix-icon="el-icon-key"
+    ></el-input>
     <el-autocomplete
       v-bind="getFieldItem(field)"
-      v-model="rfValue"
+      v-model="searchValue"
       :fetch-suggestions="querySearch"
       @input="changedEntity"
       @select="selectedEntity"
@@ -22,11 +28,11 @@ import BasicService from "@/domain/basic/BasicService";
 export default {
   name: "RelationalField",
   props: {
-    instancia: { type: Object, required: true },
+    instancia: { required: true },
     field: { type: Object, required: true },
     id: { type: String, required: true },
     presentation: { type: String, required: true },
-    persisting: { type: Function, required: true },
+    persisting: { type: Function, required: true }
     /*entidade: { type: String, required: true },
     alias: { type: String, required: true },
     endpoint: { type: String, required: true },
@@ -36,15 +42,35 @@ export default {
   data() {
     return {
       entitys: [],
-      rfValue: "",
+      rfValue: ""
     };
   },
   created: function() {
     this.service = new BasicService(axios, this.field.endpoint);
-    console.log("oi");
-    //this.rfValue = this.instancia[this.presentation];
   },
   computed: {
+    value: {
+      // getter
+      get: function() {
+        return this.instancia == null ? {} : this.instancia;
+      },
+      // setter
+      set: function(newValue) {
+        this.$emit("update:instancia", newValue);
+      }
+    },
+    searchValue: {
+      // getter
+      get: function() {
+        return this.rfValue == ""
+          ? this.value[this.presentation]
+          : this.rfValue;
+      },
+      // setter
+      set: function(newValue) {
+        this.rfValue = newValue;
+      }
+    },
     getFieldItem: app => options => {
       var item = {};
 
@@ -52,6 +78,8 @@ export default {
       item["placeholder"] = "Pesquise aqui algum " + options.prop;
       item["popper-class"] = "my-autocomplete";
       item["class"] = "rf-value";
+      item["highlight-first-item"] = true;
+      item["debounce"] = 300;
 
       return item;
     }
@@ -76,20 +104,25 @@ export default {
             console.error(err);
             this.$showError(
               err,
-              "Não foi possível consultar as entidades em " + this.field.endpoint
+              "Não foi possível consultar as entidades em " +
+                this.field.endpoint
             );
           });
-        Promise.resolve(promisse).then(function(v) {
-          return cb(v);
-        });
+        setTimeout(() => {
+          Promise.resolve(promisse).then(function(v) {
+            return cb(v);
+          });
+        }, 0);
       }
     },
     selectedEntity(entity) {
-      this.$emit("update:instancia", entity);
+      this.value = entity;
       this.rfValue = entity[this.presentation];
     },
     changedEntity() {
-      this.$emit("update:instancia", {});
+      if (this.value != {}) {
+        this.value = {};
+      }
       this.persisting();
     }
   }
