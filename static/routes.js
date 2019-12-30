@@ -11,7 +11,7 @@ let routes = [
     { value: 'Empresas', path: '/empresas', tooltip: "Registro de Empresas", component: Empresas, display: true },
     { value: 'Usuários', path: '/users', tooltip: "Registro de Usuários", component: Usuarios, display: true },
     { value: 'Parceiros', path: '/parceiros', tooltip: "Registro de Parceiros", component: Parceiros, display: true },
-    { value: 'Séries', path: '/series', tooltip: "Registro de Séries", component: Series, display: true },
+    { value: 'Séries', path: '/series', tooltip: "Registro de Séries", component: Series, display: true, props: true },
     { value: 'Gêneros', path: '/generos', tooltip: "Registro de Gêneros", component: Generos, display: true },
 ]
 

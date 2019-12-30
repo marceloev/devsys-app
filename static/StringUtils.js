@@ -9,6 +9,8 @@ export default {
         function isEmpty(arg) {
             if (arg instanceof String) {
                 return (arg === undefined || arg.length === 0);
+            } else if (arg instanceof Object) {
+                return !!arg && !Object.keys(arg).length;
             } else {
                 return (arg === undefined);
             }
