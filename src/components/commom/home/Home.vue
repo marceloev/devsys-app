@@ -1,5 +1,11 @@
 <template>
+  <div class="section">
     <div class="card card-1"></div>
+    <div class="card card-1"></div>
+    <div class="card card-1"></div>
+  </div>
+    
+    
 </template>
 
 <script>

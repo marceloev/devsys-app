@@ -4,6 +4,7 @@
       <div class="sidebar-heading">
         <h3>
           <u>TecLibrary</u>
+          <i id="untoggle-menu" class="fas fa-times btn btn-dark" @click="abreFechaMenuPanel()"></i>
         </h3>
       </div>
       <div id="menu-item" class="list-group list-group-flush">
@@ -14,7 +15,7 @@
     <div id="page-content-wrapper">
       <nav class="navbar navbar-light bg-light border-bottom navbar-expand">
         <!--justify-content-between-->
-        <i class="fas fa-bars btn btn-dark" @click="abreFechaMenuPanel()"></i>
+        <i id="toggle-menu" class="fas fa-bars btn btn-dark" @click="abreFechaMenuPanel()"></i>
         <!--<button class="btn btn-outline-success col-of-1 col-2" type="submit">Search</button>-->
 
         <div id="navbarSupportedContent" class="collapse navbar-collapse">
@@ -49,6 +50,7 @@
         <slot name="view"></slot>
       </div>
     </div>
+    <div id="dimScreen"> </div>
   </div>
 </template>
 
@@ -87,7 +89,7 @@ var loadingProps = {
 
 <style scoped>
 #sidebar-wrapper { background-color: #7386d5; min-height: 100vh; margin-left: -15rem; -webkit-transition: margin 0.25s ease-out; 
-  -moz-transition: margin 0.25s ease-out; -o-transition: margin 0.25s ease-out; transition: margin 0.25s ease-out; }
+  -moz-transition: margin 0.25s ease-out; -o-transition: margin 0.25s ease-out; transition: margin 0.25s ease-out; z-index: 1; position: fixed;}
 #sidebar-wrapper .sidebar-heading { padding: 0.875rem 1.25rem; font-size: 1.2rem; color: white; margin-bottom: 2rem }
 #sidebar-wrapper .list-group { width: 15rem; }
 #page-content-wrapper { min-width: 100vw; min-height: 100vh; display: flex; flex-direction: column; background-color: white; }
@@ -95,10 +97,13 @@ var loadingProps = {
 #wrapper.toggled #sidebar-wrapper { margin-left: 0; }
 #menu-item { border-top: 1px solid #47748b; border-bottom: 1px solid #47748b; }
 #navbarDropdown { cursor: pointer; }
+#untoggle-menu { display: initial; right: 10px; background-color: transparent; border-color: transparent; font-size: large; position: absolute;}
+#dimScreen { display: none; position:fixed; padding:0; margin:0; top:0; left:0; width: 100%; height: 100%; background:rgba(0, 0, 0, 0.5); }
 
 @media (min-width: 768px) {
-  #sidebar-wrapper { margin-left: 0; }
+  #sidebar-wrapper { margin-left: 0; z-index: 0; position: inherit;}
   #page-content-wrapper { min-width: 0; width: 100%; min-height: 0; height: inherit; }
   #wrapper.toggled #sidebar-wrapper { margin-left: -15rem; }
+  #untoggle-menu { display: none;}
 }
 </style>
