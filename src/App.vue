@@ -44,7 +44,7 @@ export default {
   }, methods: {
     focusSearchFrame: function() {
       //@keyup.ctrl.alt.75="focusSearchFrame"
-      $("#searchFrameInput").focus();
+      //$("#searchFrameInput").focus();
     }
   }, mounted() {
     $(document).keyup(function (e) {  //O evento Kyeup é acionado quando as teclas são soltas
@@ -53,7 +53,7 @@ export default {
     $(document).keydown(function (e) { //Quando uma tecla é pressionada
       if (e.which == 17) this.pressingCtrl = true; //Informando que Crtl está acionado
       if ((e.which == 75 || e.keyCode == 75) && this.pressingCtrl == true) { //Reconhecendo tecla Enter
-        this.focusSearchFrame();
+        $("#searchFrameInput").focus();
       }
     });
   }
