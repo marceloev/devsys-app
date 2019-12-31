@@ -166,7 +166,8 @@ export default {
     rules: {
       type: Object,
       required: false
-    }, loadByPK: {
+    },
+    loadByPK: {
       type: Function,
       required: false
     }
@@ -182,7 +183,7 @@ export default {
     };
   },
   computed: {
-    filtredRow: function () {
+    filtredRow: function() {
       return this.rows.filter(
         row =>
           !this.filtro ||
@@ -202,10 +203,10 @@ export default {
       return fieldType === type || fieldType.indexOf("|" + type + "|") > 0;
     }
   },
-  beforeCreate: function () {
+  beforeCreate: function() {
     Loading.service(loadingProps);
   },
-  created: function () {
+  created: function() {
     Loading.service(loadingProps).close();
     this.service = new BasicService(axios, this.serviceName);
     this.buscarTodos();
@@ -214,11 +215,12 @@ export default {
   methods: {
     changeLayout(changed) {
       if (!changed) this.modoFormulario = !this.modoFormulario;
-      
-      if (this.modoFormulario) {
-        this.data = Object.assign({}, this.$valueOrDefault(this.selectedRow, {}));
-      }
-    }, changeToRow(row) {
+      this.data = Object.assign({}, this.$valueOrDefault(this.selectedRow, {}));
+      // if (this.modoFormulario) {
+      //   this.data = Object.assign({}, this.$valueOrDefault(this.selectedRow, {}));
+      // }
+    },
+    changeToRow(row) {
       this.currentLineChanged(row);
       this.modoFormulario = true;
       this.changeLayout(true); //Força a ir para modo formulário.
@@ -331,6 +333,7 @@ export default {
       if (force) {
         if (this.persisting) {
           this.persisting = false;
+          this.changeLayout(true);
           this.$mensagem(
             "warning",
             "Alterações em andamento canceladas forçadamente!"
@@ -381,16 +384,31 @@ export default {
     },
     toPassword(arg) {
       return agr;
-    }, checkIfPkIsLoaded() {
+    },
+    checkIfPkIsLoaded() {
       const pkIsLoaded = !this.$isEmpty(this.$route.query);
+
       if (!pkIsLoaded) {
         return;
       } else if (!this.loadByPK) {
-        this.$mensagem("warning", "A tela " + this.name + " não suporta carregamento dinâmico!");
+        this.loadByPKDefault(this.$route.query, this.service, this.changeToRow);
       } else {
         this.loadByPK(this.$route.query, this.service, this.changeToRow);
       }
+    },
+    loadByPKDefault(params, service, doChange) {
+      const codigo = params["codigo"];
 
+      if (codigo) {
+        service.buscarPorId(codigo)
+          .then(resp => {
+            const data = resp.data;
+            doChange(data);
+          }).catch(err => {
+            console.error(err);
+            this.$showError("Não foi encontrado um registro de código: " + codigo);
+          });
+      }
     }
   }
 };

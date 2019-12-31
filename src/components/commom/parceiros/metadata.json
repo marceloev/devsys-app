@@ -13,7 +13,7 @@
         "label": "CPF/CNPJ",
         "prop": "cgc",
         "type": "text",
-        "mask": "CpfCnpj",
+        "mask": "",
         "disabled": false,
         "required": true
     },
