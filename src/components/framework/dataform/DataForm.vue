@@ -75,7 +75,7 @@ export default {
       };
 
       if (options.mask) {
-        metadata["masked"] = options.mask;
+        metadata["class"] = metadata["class"] + " " + ("mask-" + options.mask);
       };
 
       if (options.rows) {
