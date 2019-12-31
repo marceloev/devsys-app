@@ -1,5 +1,4 @@
-[
-    {
+[{
         "separator": "Geral",
         "bold": true
     },
@@ -14,7 +13,7 @@
         "label": "CPF/CNPJ",
         "prop": "cgc",
         "type": "text",
-        "mask": "###.###.###-##;##.###.###/####-##",
+        "mask": "CpfCnpj",
         "disabled": false,
         "required": true
     },

@@ -3,7 +3,7 @@
     <div class="border-right" id="sidebar-wrapper">
       <div class="sidebar-heading">
         <h3>
-          <u>TecLibrary</u>
+          <u id="btn-home" @click="goHome">TecLibrary</u>
           <i id="untoggle-menu" class="fas fa-times btn btn-dark" @click="abreFechaMenuPanel()"></i>
         </h3>
       </div>
@@ -66,6 +66,9 @@ export default {
     return {};
   },
   methods: {
+    goHome() {
+      this.$router.push("/home");
+    },
     abreFechaMenuPanel() {
       $("#wrapper").toggleClass("toggled");
     }, searchingTela(isSearching) {
@@ -88,22 +91,89 @@ var loadingProps = {
 </script>
 
 <style scoped>
-#sidebar-wrapper { background-color: #7386d5; min-height: 100vh; margin-left: -15rem; -webkit-transition: margin 0.25s ease-out; 
-  -moz-transition: margin 0.25s ease-out; -o-transition: margin 0.25s ease-out; transition: margin 0.25s ease-out; z-index: 1; position: fixed;}
-#sidebar-wrapper .sidebar-heading { padding: 0.875rem 1.25rem; font-size: 1.2rem; color: white; margin-bottom: 2rem }
-#sidebar-wrapper .list-group { width: 15rem; }
-#page-content-wrapper { min-width: 100vw; min-height: 100vh; display: flex; flex-direction: column; background-color: white; }
-#page-content-wrapper .active-page { padding: 0px; margin: 0px; width: 100%; flex-grow: 1; }
-#wrapper.toggled #sidebar-wrapper { margin-left: 0; }
-#menu-item { border-top: 1px solid #47748b; border-bottom: 1px solid #47748b; }
-#navbarDropdown { cursor: pointer; }
-#untoggle-menu { display: initial; right: 10px; background-color: transparent; border-color: transparent; font-size: large; position: absolute;}
-#dimScreen { display: none; position:fixed; padding:0; margin:0; top:0; left:0; width: 100%; height: 100%; background:rgba(0, 0, 0, 0.5); }
+#sidebar-wrapper {
+  background-color: #7386d5;
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin 0.25s ease-out;
+  -moz-transition: margin 0.25s ease-out;
+  -o-transition: margin 0.25s ease-out;
+  transition: margin 0.25s ease-out;
+  z-index: 1;
+  position: fixed;
+}
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+  color: white;
+  margin-bottom: 2rem;
+}
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+#page-content-wrapper {
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+#page-content-wrapper .active-page {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  flex-grow: 1;
+}
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+#menu-item {
+  border-top: 1px solid #47748b;
+  border-bottom: 1px solid #47748b;
+}
+#navbarDropdown {
+  cursor: pointer;
+}
+#btn-home {
+  cursor: pointer;
+}
+#untoggle-menu {
+  display: initial;
+  right: 10px;
+  background-color: transparent;
+  border-color: transparent;
+  font-size: large;
+  position: absolute;
+}
+#dimScreen {
+  display: none;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
 
 @media (min-width: 768px) {
-  #sidebar-wrapper { margin-left: 0; z-index: 0; position: inherit;}
-  #page-content-wrapper { min-width: 0; width: 100%; min-height: 0; height: inherit; }
-  #wrapper.toggled #sidebar-wrapper { margin-left: -15rem; }
-  #untoggle-menu { display: none;}
+  #sidebar-wrapper {
+    margin-left: 0;
+    z-index: 0;
+    position: inherit;
+  }
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+    min-height: 0;
+    height: inherit;
+  }
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+  #untoggle-menu {
+    display: none;
+  }
 }
 </style>

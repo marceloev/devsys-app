@@ -13,6 +13,7 @@
       :fetch-suggestions="querySearch"
       @input="changedEntity"
       @select="selectedEntity"
+      @blur="undoSelectEntity"
     >
       <template slot-scope="{ item }">
         <div class="suggested-frame">{{ item[id] }} - {{ item[presentation] }}</div>
@@ -45,29 +46,29 @@ export default {
       rfValue: ""
     };
   },
-  created: function() {
+  created: function () {
     this.service = new BasicService(axios, this.field.endpoint);
   },
   computed: {
     value: {
       // getter
-      get: function() {
+      get: function () {
         return this.instancia == null ? {} : this.instancia;
       },
       // setter
-      set: function(newValue) {
+      set: function (newValue) {
         this.$emit("update:instancia", newValue);
       }
     },
     searchValue: {
       // getter
-      get: function() {
+      get: function () {
         return this.rfValue == ""
           ? this.value[this.presentation]
           : this.rfValue;
       },
       // setter
-      set: function(newValue) {
+      set: function (newValue) {
         this.rfValue = newValue;
       }
     },
@@ -105,14 +106,12 @@ export default {
             this.$showError(
               err,
               "Não foi possível consultar as entidades em " +
-                this.field.endpoint
+              this.field.endpoint
             );
           });
-        setTimeout(() => {
-          Promise.resolve(promisse).then(function(v) {
-            return cb(v);
-          });
-        }, 0);
+        Promise.resolve(promisse).then(function (v) {
+          return cb(v);
+        });
       }
     },
     selectedEntity(entity) {
@@ -124,6 +123,12 @@ export default {
         this.value = {};
       }
       this.persisting();
+    }, undoSelectEntity() {
+      if (this.$isEmpty(this.value)) {
+        this.rfValue = "";
+      } else {
+        this.rfValue = this.value[this.presentation];
+      }
     }
   }
 };
@@ -133,6 +138,7 @@ export default {
 .rf-id {
   width: 10%;
   max-width: 10%;
+  cursor: pointer;
 }
 .rf-value {
   margin-left: 1%;

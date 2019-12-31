@@ -56,6 +56,7 @@ export default {
     loadAll() {
       return routes;
     }, handleSelect(rota) {
+      this.state = "";
       this.$router.push(rota.path);
     }
   }, mounted() {

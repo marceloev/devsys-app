@@ -7,7 +7,9 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/pt-br'
 import configRouter from '../static/routes'
+import SystemUtils from '../static/SystemUtils'
 import StringUtils from '../static/StringUtils'
+import ArrayUtils from '../static/ArrayUtils'
 import FormatterUtils from '../static/FormatterUtils'
 import MessageUtils from '../static/MessageUtils'
 
@@ -18,7 +20,9 @@ Vue.use(ElementUI, { locale })
 
 // Vue.http.options.root = 'http://localhost:8180'
 
+Vue.use(SystemUtils)
 Vue.use(StringUtils)
+Vue.use(ArrayUtils)
 Vue.use(MessageUtils)
 Vue.use(FormatterUtils)
 
