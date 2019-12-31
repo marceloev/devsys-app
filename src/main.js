@@ -3,6 +3,7 @@ import App from './App'
 import VueRouter from 'vue-router'
 import VueMask from 'vue-the-mask'
 import ElementUI from 'element-ui'
+
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/pt-br'
 import configRouter from '../static/routes'
@@ -20,6 +21,7 @@ Vue.use(ElementUI, { locale })
 Vue.use(StringUtils)
 Vue.use(MessageUtils)
 Vue.use(FormatterUtils)
+
 
 const router = new VueRouter({
     routes: configRouter,

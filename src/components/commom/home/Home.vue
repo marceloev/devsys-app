@@ -1,16 +1,32 @@
 <template>
   <div class="section">
-    <div class="card card-1"></div>
-    <div class="card card-1"></div>
-    <div class="card card-1"></div>
+    <div class="card card-1">
+        <sapp-text-editor
+         :arg.sync="fooObj" >
+        </sapp-text-editor>
+    </div>
   </div>
     
     
 </template>
 
 <script>
+import TextEditor from "@/components/framework/textEditor/TextEditor.vue";
 export default {
-    
+  data () {
+    return {
+      fooObj: 'abc'
+    }
+  },
+  name: 'Home',
+  components: {
+    'sapp-text-editor': TextEditor
+  },
+  methods: {
+    print(text) {
+        console.log(text);
+    }
+  }
 }
 </script>
 
