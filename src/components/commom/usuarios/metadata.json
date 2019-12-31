@@ -39,6 +39,7 @@
         "disabled": false,
         "required": false,
         "format": "dd/MM/yyyy",
+        "mask": "Date",
         "tooltip": "Digite aqui a data limite para o usuário acessar o sistemão."
     },
     {

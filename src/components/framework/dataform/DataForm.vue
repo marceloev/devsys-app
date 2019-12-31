@@ -10,6 +10,7 @@
               :presentation="field.presentation" 
               :persisting="persisting"
               :max="field.max"></sapp-relational-field>
+          <el-date-picker v-else-if="field.type === 'date'" v-model="model[field.prop]" @input="persisting" v-bind="getFieldOptions(field)"></el-date-picker>
           <el-input v-else v-model="model[field.prop]" @input="persisting" v-bind="getFieldOptions(field)"></el-input>
         </el-form-item>
       </div>
@@ -36,6 +37,10 @@ export default {
     }, persisting: {
       type: Function,
       required: false
+    }
+  }, methods: {
+    oi(e) {
+      console.log(e);
     }
   }, computed: {
     getFieldItem: (app) => (options) => {

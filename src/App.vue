@@ -29,7 +29,7 @@
 import MainMenu from "@/components/framework/mainmenu/MainMenu.vue";
 import LinkSubMenu from "@/components/framework/mainmenu/LinkSubMenu.vue"
 import LinkMenuItem from "@/components/framework/mainmenu/LinkMenuItem.vue";
-import MaskUtils from "../static/MaskUtils.js";
+
 export default {
   name: "App",
   data() {
@@ -46,11 +46,7 @@ export default {
       //@keyup.ctrl.alt.75="focusSearchFrame"
       //$("#searchFrameInput").focus();
     }
-  }, mounted() {
-    $(document).ready(function(){
-      MaskUtils.loadAllMasks();
-    });
-    
+  }, mounted() {    
     $(document).keyup(function (e) {  //O evento Kyeup é acionado quando as teclas são soltas
       if (e.which == 17) this.pressingCtrl = false; //Quando qualuer tecla for solta é preciso informar que Crtl não está pressionada
     })

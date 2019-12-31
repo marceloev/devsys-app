@@ -140,6 +140,7 @@ import axios from "axios";
 import { Loading } from "element-ui";
 import BasicService from "@/domain/basic/BasicService";
 import DataForm from "@/components/framework/dataform/DataForm";
+import MaskUtils from "../../../../static/MaskUtils.js";
 
 export default {
   name: "Dynaform",
@@ -400,16 +401,25 @@ export default {
       const codigo = params["codigo"];
 
       if (codigo) {
-        service.buscarPorId(codigo)
+        service
+          .buscarPorId(codigo)
           .then(resp => {
             const data = resp.data;
             doChange(data);
-          }).catch(err => {
+          })
+          .catch(err => {
             console.error(err);
-            this.$showError("Não foi encontrado um registro de código: " + codigo);
+            this.$showError(
+              "Não foi encontrado um registro de código: " + codigo
+            );
           });
       }
     }
+  },
+  mounted() {
+    $(document).ready(function() {
+      MaskUtils.loadAllMasks();
+    });
   }
 };
 
