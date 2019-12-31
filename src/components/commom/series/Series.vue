@@ -1,11 +1,5 @@
 <template>
-  <dvs-dynaform
-    ref="root"
-    name="Series"
-    service-name="/series"
-    instancia="Séries"
-    :metadata="metadata"
-  >
+  <dvs-dynaform ref="dynaform" name="Series" service-name="/series" instancia="Séries" :metadata="metadata" :loadByPK="loadByPK">
     <div slot="table-data-cols">
       <el-table-column prop="codigo" label="#" align="center" fixed="left" width="70" sortable></el-table-column>
       <el-table-column prop="descricao" label="Descrição" align="center" sortable></el-table-column>
@@ -40,16 +34,22 @@ export default {
       metadata: metadataJSON
       //rules: rulesJSON
     };
-  },
-  created() {
-    const hasParams = !this.$isEmpty(this.$route.query);
-    if (hasParams) {
-      this.$nextTick(function() {
-        const root = this.$refs.root;
-        root.goToLayout(1);
-        const tabela = root.$refs.tabela;
-        tabela.setCurrentRow(2);
-      });
+  }, methods: {
+    loadByPK(params, service, doChange) {
+      const codigo = params["codigo"];
+
+      if (!codigo) {
+        this.$mensagem("warning", "É necessário selecionar um código válido para o re-posicionamento!");
+      } else {
+        service.buscarPorId(codigo)
+          .then(resp => {
+            const data = resp.data;
+            doChange(data);
+          }).catch(err => {
+            console.error(err);
+            this.$showError("Não foi encontrado série para o código: " + codigo);
+          });
+      }
     }
   }
 };

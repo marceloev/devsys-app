@@ -166,6 +166,9 @@ export default {
     rules: {
       type: Object,
       required: false
+    }, loadByPK: {
+      type: Function,
+      required: false
     }
   },
   data() {
@@ -179,7 +182,7 @@ export default {
     };
   },
   computed: {
-    filtredRow: function() {
+    filtredRow: function () {
       return this.rows.filter(
         row =>
           !this.filtro ||
@@ -199,33 +202,26 @@ export default {
       return fieldType === type || fieldType.indexOf("|" + type + "|") > 0;
     }
   },
-  beforeCreate: function() {
+  beforeCreate: function () {
     Loading.service(loadingProps);
   },
-  created: function() {
+  created: function () {
     Loading.service(loadingProps).close();
     this.service = new BasicService(axios, this.serviceName);
     this.buscarTodos();
+    this.checkIfPkIsLoaded();
   },
   methods: {
     changeLayout(changed) {
       if (!changed) this.modoFormulario = !this.modoFormulario;
-
+      
       if (this.modoFormulario) {
         this.data = Object.assign({}, this.$valueOrDefault(this.selectedRow, {}));
       }
-    },
-    goToLayout(index) {
-      if (index != 1 && index != 0) {
-        return;
-      }
-
-      if (this.modoFormulario && index == 0) {
-        this.changeLayout(true);
-      } else if (!this.modoFormulario && index == 1) {
-        console.log("changing")
-        this.changeLayout();
-      }
+    }, changeToRow(row) {
+      this.currentLineChanged(row);
+      this.modoFormulario = true;
+      this.changeLayout(true); //Força a ir para modo formulário.
     },
     currentLineChanged(row) {
       if (this.persisting) this.cancelar(true);
@@ -238,12 +234,12 @@ export default {
       Loading.service(loadingProps);
       this.rows = [];
       this.selectedRow = undefined;
+      this.modoFormulario = false;
+      this.changeLayout(true); //Força a ir para modo grade.
       this.service
         .buscarTodos()
         .then(resp => {
           this.rows = resp.data;
-          this.modoFormulario = false;
-          this.changeLayout(true); //Força a ir para modo grade.
         })
         .catch(err => {
           this.$showError(
@@ -385,6 +381,16 @@ export default {
     },
     toPassword(arg) {
       return agr;
+    }, checkIfPkIsLoaded() {
+      const pkIsLoaded = !this.$isEmpty(this.$route.query);
+      if (!pkIsLoaded) {
+        return;
+      } else if (!this.loadByPK) {
+        this.$mensagem("warning", "A tela " + this.name + " não suporta carregamento dinâmico!");
+      } else {
+        this.loadByPK(this.$route.query, this.service, this.changeToRow);
+      }
+
     }
   }
 };
