@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import BasicService from "@/domain/basic/BasicService";
 
 export default {
@@ -47,7 +46,7 @@ export default {
     };
   },
   created: function () {
-    this.service = new BasicService(axios, this.field.endpoint);
+    this.service = new BasicService(this.$http, this.field.endpoint);
   },
   computed: {
     value: {

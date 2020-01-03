@@ -1,6 +1,9 @@
 <template>
     <div id="app">
-        <main-menu>
+        <login-page v-if="!isLogged">
+          
+        </login-page>
+        <main-menu v-else>
             <div slot="menu-itens">
                 <el-menu default-active="1" class="el-menu-vertical-demo" router>
                     <link-sub-menu index="1" name="Cadastros" tooltip="Veja as opções de cadastros" icon="fas fa-info">
@@ -26,12 +29,14 @@
 </template>
 
 <script>
+import Login from "@/components/commom/login/Login.vue";
 import MainMenu from "@/components/framework/mainmenu/MainMenu.vue";
 import LinkSubMenu from "@/components/framework/mainmenu/LinkSubMenu.vue"
 import LinkMenuItem from "@/components/framework/mainmenu/LinkMenuItem.vue";
 
 export default {
   name: "App",
+  
   data() {
     return {
       pressingCtrl: false,
@@ -40,11 +45,18 @@ export default {
   components: {
     "main-menu": MainMenu,
     "link-sub-menu": LinkSubMenu,
-    "link-menu-item": LinkMenuItem
+    "link-menu-item": LinkMenuItem,
+    "login-page": Login
   }, methods: {
     focusSearchFrame: function() {
       //@keyup.ctrl.alt.75="focusSearchFrame"
       //$("#searchFrameInput").focus();
+    }
+  }, computed: {
+    isLogged: function() {
+      const isLogged = localStorage.getItem('jwt');
+      console.log(isLogged)
+      return isLogged;
     }
   }, mounted() {    
     $(document).keyup(function (e) {  //O evento Kyeup é acionado quando as teclas são soltas

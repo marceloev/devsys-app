@@ -142,7 +142,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import { Loading } from "element-ui";
 import BasicService from "@/domain/basic/BasicService";
 import DataForm from "@/components/framework/dataform/DataForm";
@@ -186,8 +185,11 @@ export default {
       filtro: "",
       selectedRow: undefined,
       data: {},
-      rows: []
-    };
+      rows: [],
+      loadingProps: {
+        text: "Carregando " + this.name + "...",
+      }
+    }
   },
   computed: {
     filtredRow: function() {
@@ -211,11 +213,11 @@ export default {
     }
   },
   beforeCreate: function() {
-    Loading.service(loadingProps);
+    Loading.service(this.loadingProps);
   },
   created: function() {
-    Loading.service(loadingProps).close();
-    this.service = new BasicService(axios, this.serviceName);
+    Loading.service(this.loadingProps).close();
+    this.service = new BasicService(this.$http, this.serviceName);
     this.buscarTodos();
     this.checkIfPkIsLoaded();
   },
@@ -240,7 +242,7 @@ export default {
       this.persisting = true;
     },
     buscarTodos() {
-      Loading.service(loadingProps);
+      Loading.service(this.loadingProps);
       this.rows = [];
       this.selectedRow = undefined;
       this.modoFormulario = false;
@@ -256,7 +258,7 @@ export default {
             'Não foi possível carregar os "' + this.name + '". '
           );
         });
-      Loading.service(loadingProps).close();
+      Loading.service(this.loadingProps).close();
     },
     excluir() {
       if (this.persisting) {
@@ -437,10 +439,6 @@ export default {
       MaskUtils.loadAllMasks();
     });
   }
-};
-
-var loadingProps = {
-  text: "Carregando..."
 };
 </script>
 

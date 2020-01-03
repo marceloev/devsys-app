@@ -3,6 +3,7 @@ import App from './App'
 import VueRouter from 'vue-router'
 import VueMask from 'vue-the-mask'
 import ElementUI from 'element-ui'
+import Axios from 'axios'
 
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/pt-br'
@@ -13,12 +14,11 @@ import ArrayUtils from '../static/ArrayUtils'
 import FormatterUtils from '../static/FormatterUtils'
 import MessageUtils from '../static/MessageUtils'
 
-// Vue.use(VueResource)
 Vue.use(VueRouter)
 Vue.use(VueMask)
 Vue.use(ElementUI, { locale })
 
-// Vue.http.options.root = 'http://localhost:8180'
+Vue.prototype.$http = Axios;
 
 Vue.use(SystemUtils)
 Vue.use(StringUtils)
@@ -29,8 +29,26 @@ Vue.use(FormatterUtils)
 
 const router = new VueRouter({
     routes: configRouter,
-    mode: 'history'
+    mode: 'history',
 })
+
+router.beforeEach((to, from, next) => {
+    const notRequiredAuthRouts = ["/login", "/logout"];
+    
+    const loggedIn = localStorage.getItem('jwt');
+
+    if (loggedIn || Vue.prototype.$isInArray(notRequiredAuthRouts, to.path)) {
+        next();
+    } else {
+        next({
+            path: '/login',
+            query: {
+                doLogin: true
+            },
+            params: { nextUrl: to.fullPath }
+        })
+    }
+});
 
 new Vue({
     el: '#app',

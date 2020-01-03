@@ -1,3 +1,4 @@
+import Login from '@/components/commom/login/Login.vue'; 
 import Home from '@/components/commom/home/Home.vue';
 import Empresas from '@/components/commom/empresas/Empresas.vue';
 import Usuarios from '@/components/commom/usuarios/Usuarios.vue';
