@@ -1,7 +1,7 @@
 {
     "cgc": [
         { "required": true, "message": "O CPF/CNPJ do Parceiro é obrigatória", "trigger": "blur" },
-        { "max": 18, "message": "O CPF/CNPJ do Parceiro não pode ultrapassar 14 dígitos!", "trigger": "blur" }
+        { "max": 18, "message": "O CPF/CNPJ do Parceiro não pode ultrapassar 14 dígitos!", "trigger": ["blur", "change"] }
     ],
     "razao": [
         { "required": true, "message": "A Razão Social/Nome do Parceiro é obrigatória", "trigger": "blur" }

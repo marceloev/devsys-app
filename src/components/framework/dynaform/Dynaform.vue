@@ -114,7 +114,13 @@
       </div>
     </div>
     <div id="modo-formulario" v-show="modoFormulario">
-      <dvs-dataform :metadata="metadata" :model="data" :persisting="notifyEdit" :rules="rules"></dvs-dataform>
+      <dvs-dataform
+        ref="dataform"
+        :metadata="metadata"
+        :model="data"
+        :persisting="notifyEdit"
+        :rules="rules"
+      ></dvs-dataform>
     </div>
     <div id="modo-grade" v-show="!modoFormulario">
       <el-table
@@ -311,24 +317,33 @@ export default {
         return;
       }
 
-      this.service
-        .salvar(this.data)
-        .then(resp => {
-          this.persisting = false;
-          this.changeLayout();
+      this.$refs["dataform"].isValid(resp => {
+        if (!resp) {
           this.$mensagem(
-            "success",
-            this.name + " incluído/alterado com sucesso"
+            "warning",
+            "Verifique as validações do formulário antes de salvar!"
           );
-          this.buscarTodos();
-        })
-        .catch(err => {
-          console.error(err);
-          this.$showError(
-            err,
-            "Não foi possível incluir/alterar o " + this.name
-          );
-        });
+        } else {
+          this.service
+            .salvar(this.data)
+            .then(resp => {
+              this.persisting = false;
+              this.changeLayout();
+              this.$mensagem(
+                "success",
+                this.name + " incluído/alterado com sucesso"
+              );
+              this.buscarTodos();
+            })
+            .catch(err => {
+              console.error(err);
+              this.$showError(
+                err,
+                "Não foi possível incluir/alterar o " + this.name
+              );
+            });
+        }
+      });
     },
     cancelar(force) {
       if (force) {
@@ -364,6 +379,7 @@ export default {
       this.changeLayout(true); //Força a ir para modo grade.
       this.persisting = true;
       this.data = {};
+      this.$refs["dataform"].$refs["form"].resetFields();
     },
     editar() {
       if (this.persisting) {

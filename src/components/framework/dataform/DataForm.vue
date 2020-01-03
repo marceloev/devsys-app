@@ -1,5 +1,5 @@
 <template>
-    <el-form id="form-fields" label-width="auto" ref="form" size="mini" :model="model" :rules="rules" :show-message="!!rules">
+    <el-form id="form" label-width="auto" ref="form" name="form"  size="mini" :model="model" :rules="rules" :show-message="!!rules">
       <div v-for="field in metadata" v-bind:key="field.prop"> 
         <el-divider v-if="field.separator" content-position="left" class="field-form-separator"> {{field.separator}}</el-divider>
         <el-form-item v-else v-bind="getFieldItem(field)" class="field-form-item">
@@ -11,7 +11,7 @@
               :persisting="persisting"
               :max="field.max"></sapp-relational-field>
           <el-date-picker v-else-if="field.type === 'date'" v-model="model[field.prop]" @input="persisting" v-bind="getFieldOptions(field)"></el-date-picker>
-          <el-input v-else v-model="model[field.prop]" @input="persisting" v-bind="getFieldOptions(field)"></el-input>
+          <el-input v-else v-model="model[field.prop]" @input="persisting" v-bind="getFieldOptions(field)" inline-message></el-input>
         </el-form-item>
       </div>
     </el-form>
@@ -39,9 +39,9 @@ export default {
       required: false
     }
   }, methods: {
-    oi(e) {
-      console.log(e);
-    }
+    isValid: function(success) {
+      return this.$refs["form"].validate((valid) => success(valid));
+    },
   }, computed: {
     getFieldItem: (app) => (options) => {
       var item = {};
