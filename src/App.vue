@@ -52,7 +52,7 @@ export default {
     }
   }, computed: {
     isLogged: function() {
-      const isLogged = localStorage.getItem("jwt");
+      const isLogged = localStorage.getItem("user");
       return isLogged;
     }
   }, mounted() {    

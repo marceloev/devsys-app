@@ -40,12 +40,12 @@ router.beforeEach((to, from, next) => {
     if (loggedIn || Vue.prototype.$isInArray(notRequiredAuthRouts, to.path)) {
         next();
     } else {
+        localStorage.setItem("nextPath", to.fullPath);
         next({
             path: '/login',
             query: {
                 doLogin: true
-            },
-            params: { nextUrl: to.fullPath }
+            }
         })
     }
 });

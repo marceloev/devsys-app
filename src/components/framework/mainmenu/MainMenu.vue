@@ -20,37 +20,40 @@
 
         <div id="navbarSupportedContent" class="collapse navbar-collapse">
           <ul class="navbar-nav ml-auto"></ul>
-          <sapp-search-frame :searchingListener="searchingTela"/>
+          <sapp-search-frame :searchingListener="searchingTela" />
           <ul class="navbar-nav">
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link"
-                  id="navbarDropdown"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-ellipsis-v"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                  <h6 class="dropdown-header">
-                    <i class="fas fa-tools"></i> Outras Opções
-                  </h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
-            </ul>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link"
+                id="navbarDropdown"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i class="fas fa-ellipsis-v"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <h6 class="dropdown-header">
+                  <i class="fas fa-tools"></i> Outras Opções
+                </h6>
+                <div class="dropdown-divider"></div>
+                <el-avatar :size="50" >
+                  <img shape="square" :fit="'fill'" src="http://serienatico.herokuapp.com/users/foto/admin" />
+                </el-avatar>
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" @click="doLogout">Sair do sistema</a>
+              </div>
+            </li>
+          </ul>
         </div>
       </nav>
       <div class="container-fluid active-page">
         <slot name="view"></slot>
       </div>
     </div>
-    <div id="dimScreen"> </div>
+    <div id="dimScreen"></div>
   </div>
 </template>
 
@@ -58,9 +61,9 @@
 import { Loading } from "element-ui";
 import SearchFrame from "@/components/framework/mainmenu/SearchFrame.vue";
 export default {
-  name: 'MainMenu',
+  name: "MainMenu",
   components: {
-    'sapp-search-frame': SearchFrame
+    "sapp-search-frame": SearchFrame
   },
   data() {
     return {};
@@ -71,15 +74,21 @@ export default {
     },
     abreFechaMenuPanel() {
       $("#wrapper").toggleClass("toggled");
-    }, searchingTela(isSearching) {
-      var size = (isSearching ? 300 : 200);
+    },
+    searchingTela(isSearching) {
+      var size = isSearching ? 300 : 200;
       $("#formSearchTela").width(size);
+    },
+    doLogout() {
+      localStorage.removeItem("user");
+      this.$router.push("/login?logout=true");
+      this.$router.go();
     }
   },
-  beforeCreate: function () {
+  beforeCreate: function() {
     Loading.service(loadingProps);
   },
-  created: function () {
+  created: function() {
     Loading.service(loadingProps).close();
     this.abreFechaMenuPanel();
   }

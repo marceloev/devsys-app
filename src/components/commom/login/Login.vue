@@ -71,7 +71,7 @@
 				doLoginQParam: false,
 				wrongPasswordQParam: false,
 				logoutQParam: false,
-				defaultUserImg: require('@/assets/user.png'),
+				defaultUserImg: "http://serienatico.herokuapp.com/users/foto/admin",
 				cssProps: {
 					height: "100%",
 					width: "100%",
@@ -91,6 +91,7 @@
 		},
 		mounted() {
 			this.$refs.username.focus();
+			console.log(this.$route.query)
 			this.doLoginQParam = this.$route.query["doLogin"];
 			this.wrongPasswordQParam = this.$route.query["badCredentials"];
 			this.logoutQParam = this.$route.query["logout"];
@@ -99,14 +100,11 @@
 			async getUserFoto() {
 				const username = this.$refs.username.value.trim();
 				const elem = this.$refs.userImg;
-				this
-					.service
-					.findFotoByLogin(username)
-					.then(resp => {
-						elem.src = "http://serienatico.herokuapp.com/users/foto/" + username;
-					}).catch(erro => {
-						elem.src = this.defaultUserImg;
-					});
+				if (username) {
+					elem.src = "http://serienatico.herokuapp.com/users/foto/" + username + "?withDefault=true";
+				} else {
+					elem.src = this.defaultUserImg;
+				}
 			},
 			doLogin() {
 				const username = this.$refs.username.value.trim();
@@ -116,13 +114,14 @@
 					.findByLogin(username, password)
 					.then(resp => {
 						localStorage.setItem("user", resp.data);
-						const nextUrl = this.$route.params.nextUrl;
-						console.log(nextUrl || "/")
-						
+						const nextUrl = localStorage.getItem("nextPath");
+						this.$router.push(nextUrl);
+						this.$router.go();
 					})
 					.catch(err => {
-						console.log(err.response.data)
+						console.error(err)
 						this.doLoginQParam = false;
+						this.logoutQParam = false;
 						this.wrongPasswordQParam = true;
 						this.$mensagem("error", "Usuário/Senha inválidos!");
 					});
