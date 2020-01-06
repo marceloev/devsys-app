@@ -35,7 +35,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     const notRequiredAuthRouts = ["/login", "/logout"];
     
-    const loggedIn = localStorage.getItem('jwt');
+    const loggedIn = localStorage.getItem("user");
 
     if (loggedIn || Vue.prototype.$isInArray(notRequiredAuthRouts, to.path)) {
         next();

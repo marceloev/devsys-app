@@ -1,8 +1,6 @@
 <template>
     <div id="app">
-        <login-page v-if="!isLogged">
-          
-        </login-page>
+        <login-page v-if="!isLogged"/>
         <main-menu v-else>
             <div slot="menu-itens">
                 <el-menu default-active="1" class="el-menu-vertical-demo" router>
@@ -54,8 +52,7 @@ export default {
     }
   }, computed: {
     isLogged: function() {
-      const isLogged = localStorage.getItem('jwt');
-      console.log(isLogged)
+      const isLogged = localStorage.getItem("jwt");
       return isLogged;
     }
   }, mounted() {    
