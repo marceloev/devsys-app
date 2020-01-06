@@ -6,7 +6,7 @@
 					<div class="col-lg-8 col-sm-8 col-12 main-section">
 						<div class="modal-content">
 							<div class="col-lg-12 col-sm-12 col-12 user-img">
-								<img style="border-radius: 50px;" src="@/assets/user.png" />
+								<img ref="userImg" style="border-radius: 50px;" :src="defaultUserImg" />
 							</div>
 							<div class="col-lg-12 col-sm-12 col-12 user-name">
 								<h2>
@@ -17,7 +17,7 @@
 								<font size="4">Por favor, faça o login!</font>
 							</div>
 							<div class="alert alert-danger" v-if="wrongPasswordQParam">
-								<font size="4">Usuário/Senha incorretos!</font>
+								<font size="4">Usuário/Senha inválidos!</font>
 							</div>
 							<div class="alert alert-info" v-if="logoutQParam">
 								<font size="4">Logout efetuado com sucesso!</font>
@@ -45,7 +45,6 @@
 										name="password"
 										ref="password"
 										autocomplete="current-password"
-										required
 									/>
 								</div>
 								<button class="btn btn-success">Acessar o Sistema</button>
@@ -72,6 +71,7 @@
 				doLoginQParam: false,
 				wrongPasswordQParam: false,
 				logoutQParam: false,
+				defaultUserImg: require('@/assets/user.png'),
 				cssProps: {
 					height: "100%",
 					width: "100%",
@@ -96,9 +96,17 @@
 			this.logoutQParam = this.$route.query["logout"];
 		},
 		methods: {
-			getUserFoto() {
+			async getUserFoto() {
 				const username = this.$refs.username.value.trim();
-				console.log("eai? " + username);
+				const elem = this.$refs.userImg;
+				this
+					.service
+					.findFotoByLogin(username)
+					.then(resp => {
+						elem.src = "http://serienatico.herokuapp.com/users/foto/" + username;
+					}).catch(erro => {
+						elem.src = this.defaultUserImg;
+					});
 			},
 			doLogin() {
 				const username = this.$refs.username.value.trim();
@@ -116,6 +124,7 @@
 						console.log(err.response.data)
 						this.doLoginQParam = false;
 						this.wrongPasswordQParam = true;
+						this.$mensagem("error", "Usuário/Senha inválidos!");
 					});
 			}
 		}

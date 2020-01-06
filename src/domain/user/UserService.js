@@ -17,4 +17,9 @@ export default class UserService extends BasicService {
 
         return this.axios.get(finalURL, { params: queryParams });
     }
+
+    findFotoByLogin(username) {
+        var finalURL = this.url + '/' + this.service + '/foto/' + username;
+        return this.axios.get(finalURL);
+    }
 }

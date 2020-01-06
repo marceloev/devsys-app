@@ -2,8 +2,8 @@ export default class BasicService {
 
     constructor(axios, service) {
         this.axios = axios;
-        this.url = 'http://127.0.0.1:8180';
-        //this.url = 'http://serienatico.herokuapp.com';
+        //this.url = 'http://127.0.0.1:8180';
+        this.url = 'http://serienatico.herokuapp.com';
         this.service = service;
     }
 
