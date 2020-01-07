@@ -46,7 +46,7 @@ export default {
     }
   }, computed: {
     doPasswordShow: (app) => (password) => {
-      if (password.toString().length == 0)
+      if (!password)
         return "";
       else
         return '*'.repeat(password.toString().length);

@@ -71,7 +71,7 @@
 				doLoginQParam: false,
 				wrongPasswordQParam: false,
 				logoutQParam: false,
-				defaultUserImg: "http://serienatico.herokuapp.com/users/foto/admin",
+				defaultUserImg: this.$getUserFotoURL("ADMIN"),
 				cssProps: {
 					height: "100%",
 					width: "100%",
@@ -91,7 +91,6 @@
 		},
 		mounted() {
 			this.$refs.username.focus();
-			console.log(this.$route.query)
 			this.doLoginQParam = this.$route.query["doLogin"];
 			this.wrongPasswordQParam = this.$route.query["badCredentials"];
 			this.logoutQParam = this.$route.query["logout"];
@@ -101,7 +100,7 @@
 				const username = this.$refs.username.value.trim();
 				const elem = this.$refs.userImg;
 				if (username) {
-					elem.src = "http://serienatico.herokuapp.com/users/foto/" + username + "?withDefault=true";
+					elem.src = this.$getUserFotoURL(username, true);
 				} else {
 					elem.src = this.defaultUserImg;
 				}
@@ -113,9 +112,9 @@
 					.service
 					.findByLogin(username, password)
 					.then(resp => {
-						localStorage.setItem("user", resp.data);
+						localStorage.setItem("user", JSON.stringify(resp.data));
 						const nextUrl = localStorage.getItem("nextPath");
-						this.$router.push(nextUrl);
+						this.$router.push(nextUrl || "/");
 						this.$router.go();
 					})
 					.catch(err => {
@@ -124,6 +123,7 @@
 						this.logoutQParam = false;
 						this.wrongPasswordQParam = true;
 						this.$mensagem("error", "Usuário/Senha inválidos!");
+						this.$refs.password.value = "";
 					});
 			}
 		}

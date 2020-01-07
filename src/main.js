@@ -19,6 +19,7 @@ Vue.use(VueMask)
 Vue.use(ElementUI, { locale })
 
 Vue.prototype.$http = Axios;
+//Vue.prototype.$url = "http://serienatico.herokuapp.com";
 
 Vue.use(SystemUtils)
 Vue.use(StringUtils)

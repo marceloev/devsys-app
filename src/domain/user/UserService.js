@@ -14,7 +14,6 @@ export default class UserService extends BasicService {
             username: username,
             password: password
         };
-
         return this.axios.get(finalURL, { params: queryParams });
     }
 

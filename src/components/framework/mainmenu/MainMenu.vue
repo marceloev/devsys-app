@@ -38,7 +38,7 @@
                 </h6>
                 <div class="dropdown-divider"></div>
                 <el-avatar :size="50" >
-                  <img shape="square" :fit="'fill'" src="http://serienatico.herokuapp.com/users/foto/admin" />
+                  <img shape="square" :fit="'fill'" :src="loggedUserFoto" />
                 </el-avatar>
                 <a class="dropdown-item" href="#">Action</a>
                 <a class="dropdown-item" href="#">Another action</a>
@@ -66,7 +66,9 @@ export default {
     "sapp-search-frame": SearchFrame
   },
   data() {
-    return {};
+    return {
+      loggedUserFoto: this.$getUserFotoURL(this.$getUser("login"), true),
+    };
   },
   methods: {
     goHome() {
