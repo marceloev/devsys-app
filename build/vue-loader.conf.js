@@ -7,6 +7,9 @@ const sourceMapEnabled = isProduction
   : config.dev.cssSourceMap
 
 module.exports = {
+    devServer: {
+      proxy: 'http://serienatico.herokuapp.com/'
+    },
   loaders: utils.cssLoaders({
     sourceMap: sourceMapEnabled,
     extract: isProduction

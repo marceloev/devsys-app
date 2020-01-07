@@ -49,7 +49,7 @@ export default {
       if (!password)
         return "";
       else
-        return '*'.repeat(password.toString().length);
+        return '*'.repeat(8);
     }
   }
 }
