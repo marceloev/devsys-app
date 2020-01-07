@@ -193,13 +193,7 @@ export default {
   },
   computed: {
     filtredRow: function() {
-      return this.rows.filter(
-        row =>
-          !this.filtro ||
-          JSON.stringify(Object.values(row))
-            .toUpperCase()
-            .indexOf(this.filtro.toUpperCase()) > -1
-      );
+      return this.rows.filter(row => !this.filtro || JSON.stringify(Object.values(row)).toUpperCase().indexOf(this.filtro.toUpperCase()) > -1);
     },
     label: app => label => {
       return label + ":";
