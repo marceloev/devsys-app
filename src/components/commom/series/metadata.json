@@ -28,6 +28,8 @@
         "label": "Data Primeiro Episódio",
         "prop": "dataPrimeiroEpisodio",
         "type": "date",
+        "format": "dd/MM/yyyy",
+        "mask": "Date",
         "disabled": false,
         "required": true
     },
@@ -35,6 +37,8 @@
         "label": "Data Último Episódio",
         "prop": "dataUltimoEpisodio",
         "type": "date",
+        "format": "dd/MM/yyyy",
+        "mask": "Date",
         "disabled": false,
         "required": false
     },

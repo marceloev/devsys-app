@@ -2,7 +2,7 @@ export default class BasicService {
 
     constructor(axios, service) {
         this.axios = axios;
-        this.url = 'http://localhost:8080/api/';
+        this.url = '/api';
         //this.url = 'http://serienatico.herokuapp.com';
         this.service = service;
     }
