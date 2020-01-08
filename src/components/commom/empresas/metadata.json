@@ -1,0 +1,111 @@
+[{
+        "separator": "Geral",
+        "bold": true
+    },
+    {
+        "label": "Código",
+        "prop": "codigo",
+        "type": "number",
+        "disabled": true,
+        "required": false
+    },
+    {
+        "label": "CPF/CNPJ",
+        "prop": "cgc",
+        "type": "text",
+        "mask": "CpfCnpj",
+        "disabled": false,
+        "required": true
+    },{
+        "label": "Ativa",
+        "prop": "ativo",
+        "type": "check",
+        "disabled": false
+    },
+    {
+        "label": "Razão Social",
+        "prop": "razaoSocial",
+        "type": "text",
+        "disabled": false,
+        "required": true,
+        "maxlength": 150,
+        "tooltip": "Razão Social"
+    },
+    {
+        "label": "Nome Fantasia",
+        "prop": "nomeFantasia",
+        "type": "text",
+        "disabled": false,
+        "required": false,
+        "maxlength": 150,
+        "tooltip": "Nome Fantasia"
+    },
+    {
+        "label": "Insc. Estadual",
+        "prop": "ie",
+        "type": "text",
+        "disabled": false,
+        "required": false,
+        "maxlength": 20,
+        "tooltip": "Inscrição Estadual"
+    },
+    {
+        "label": "Insc. Municipal",
+        "prop": "inscmun",
+        "type": "text",
+        "disabled": false,
+        "required": false,
+        "maxlength": 20,
+        "tooltip": "Inscrição Municipal"
+    },
+    {
+        "label": "E-mail",
+        "prop": "email",
+        "type": "email",
+        "disabled": false,
+        "required": false,
+        "maxlength": 100,
+        "tooltip": "E-mail"
+    },
+    {
+        "separator": "Endereço",
+        "bold": true
+    },
+    {
+        "label": "Bairro",
+        "prop": "bairro",
+        "type": "text",
+        "disabled": false,
+        "required": false,
+        "maxlength": 60,
+        "tooltip": "Nome do Bairro/Região"
+    },
+    {
+        "label": "Logradouro",
+        "prop": "logradouro",
+        "type": "text",
+        "disabled": false,
+        "required": false,
+        "maxlength": 60,
+        "tooltip": "Nome da Rua/Logradouro"
+    },
+    {
+        "label": "Nº",
+        "prop": "numero",
+        "type": "number",
+        "disabled": false,
+        "required": false,
+        "maxlength": 10,
+        "tooltip": "Nro da residência"
+    },
+    {
+        "label": "Complemento",
+        "prop": "complemento",
+        "type": "textarea",
+        "disabled": false,
+        "required": false,
+        "maxlength": 1000,
+        "rows": 4,
+        "tooltip": "Complemento do Endereço"
+    }
+]

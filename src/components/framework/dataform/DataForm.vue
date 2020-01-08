@@ -11,6 +11,7 @@
               :persisting="persisting"
               :max="field.max"></sapp-relational-field>
           <el-date-picker v-else-if="field.type === 'date'" v-model="model[field.prop]" @input="persisting" v-bind="getFieldOptions(field)"></el-date-picker>
+          <el-checkbox v-else-if="field.type === 'check'" v-model="model[field.prop]" @input="persisting" v-bind="getFieldOptions(field)"></el-checkbox>
           <el-input v-else v-model="model[field.prop]" @input="persisting" v-bind="getFieldOptions(field)" inline-message></el-input>
         </el-form-item>
       </div>
@@ -67,6 +68,11 @@ export default {
       if (options.maxlength) {
         metadata["maxlength"] = options.maxlength;
       };
+
+    if (options.type == "check") {
+      metadata["true-label"] = "S";
+      metadata["false-label"] = "N";
+    };
 
       if (options.tooltip) {
         metadata["sapp-custom-tooltip"] = true;

@@ -2,7 +2,21 @@ export default {
 
     install(Vue, options) {
 
+        Vue.prototype.$formatSimNao = (arg) => formatSimNao(arg);
         Vue.prototype.$formatCpfCnpj = (arg) => formatCpfCnpj(arg);
+        Vue.prototype.$formatDate = (arg, dataDefault) => formatDate(arg, dataDefault);
+
+        function formatSimNao(arg) {
+            if (arg) {
+                if (arg === true || arg == "S" || arg == "Sim") {
+                    return "Sim";
+                } else {
+                    return "Não";
+                }
+            } else {
+                return "Não"
+            }
+        };
 
         function formatCpfCnpj(arg) {
             arg = ("" + arg).replace(/\D/g, ""); //Remove tudo o que não é dígito
@@ -22,8 +36,6 @@ export default {
 
             return arg;
         };
-
-        Vue.prototype.$formatDate = (arg, dataDefault) => formatDate(arg, dataDefault);
 
         function formatDate(arg, dataDefault) {
             if (!arg) {
